@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateBook extends Component {
     constructor(props) {
@@ -40,7 +41,15 @@ export default class CreateBook extends Component {
         console.log(`Name: ${this.state.name}`);
         console.log(`Description: ${this.state.description}`);
         console.log(`Progress: ${this.state.progress}`);
-        
+
+        const newTodo = {
+            description: this.state.description,
+            progress: this.state.progress,
+            name: this.state.name
+        };
+        axios.post('http://192.168.1.45:8080/update_book', newTodo)
+        .then(res => console.log(res.data));
+
         this.setState({
             name: '',
             description: '',
