@@ -92,7 +92,7 @@ export default class CreateBook extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Create Todo" className="btn btn-primary" />
+                        <input type="submit" value="Create Book" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

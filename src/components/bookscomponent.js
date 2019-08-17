@@ -8,7 +8,7 @@ const Book = props => (
         <td>{props.book.description}</td>
         <td>{props.book.progress}</td>
         <td>
-            <Link to={"/edit/"+props.book._id}>Edit</Link>
+            <Link to={"/edit/"+props.book.name}>Edit</Link>
         </td>
     </tr>
 )
@@ -43,6 +43,7 @@ export default class BookList extends Component {
                             <th>Name</th>
                             <th>Description</th>
                             <th>Progress</th>
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>
