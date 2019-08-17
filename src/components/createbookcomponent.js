@@ -42,12 +42,12 @@ export default class CreateBook extends Component {
         console.log(`Description: ${this.state.description}`);
         console.log(`Progress: ${this.state.progress}`);
 
-        const newTodo = {
+        const newBook = {
             description: this.state.description,
             progress: this.state.progress,
             name: this.state.name
         };
-        axios.post('http://192.168.1.45:8080/update_book', newTodo)
+        axios.post('http://192.168.1.45:8080/update_book', newBook)
         .then(res => console.log(res.data));
 
         this.setState({
