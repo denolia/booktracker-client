@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import API from '../environment'
+
 
 export default class CreateBook extends Component {
     constructor(props) {
@@ -47,7 +49,7 @@ export default class CreateBook extends Component {
             progress: this.state.progress,
             name: this.state.name
         };
-        axios.post('http://192.168.1.45:8080/update_book', newBook)
+        axios.post(API + 'update_book', newBook)
         .then(res => console.log(res.data));
 
         this.setState({

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API from '../environment.js'
 
 const Book = props => (
     <tr>
@@ -19,7 +20,7 @@ export default class BookList extends Component {
         this.state = {books: []};
     }
     componentDidMount() {
-        axios.get('http://192.168.1.45:8080/books')
+        axios.get(API + 'books')
             .then(response => {
                 this.setState({ books: response.data });
             })

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import API from '../environment'
+
 
 export default class EditBook extends Component {
     constructor(props) {
@@ -35,7 +37,7 @@ export default class EditBook extends Component {
         });
     }
     componentDidMount() {
-        axios.get('http://192.168.1.45:8080/book?name='+this.props.match.params.id)
+        axios.get(API + 'book?name='+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     name: response.data.name,
@@ -55,7 +57,7 @@ export default class EditBook extends Component {
             name: this.state.name
         };
         console.log(newBook);
-        axios.post('http://192.168.1.45:8080/update_book', newBook)
+        axios.post(API + 'update_book', newBook)
             .then(res => console.log(res.data));
         
         this.props.history.push('/');
