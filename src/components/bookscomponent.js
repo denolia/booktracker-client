@@ -9,7 +9,7 @@ const Book = props => (
         <td>{props.book.description}</td>
         <td>{props.book.progress}</td>
         <td>
-            <Link to={"/edit/"+props.book.name}>Edit</Link>
+            <Link to={"/edit/"+props.book.id}>Edit</Link>
         </td>
     </tr>
 )

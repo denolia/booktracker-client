@@ -9,6 +9,7 @@ export default class EditBook extends Component {
 
         this.state = {
             name: '',
+            id: '',
             description: '',
             progress: ''
         }
@@ -37,12 +38,14 @@ export default class EditBook extends Component {
         });
     }
     componentDidMount() {
-        axios.get(API + 'book?name='+this.props.match.params.id)
+        axios.get(API + 'book?id='+this.props.match.params.id)
             .then(response => {
+                console.log(response);
                 this.setState({
                     name: response.data.name,
                     description: response.data.description,
-                    progress: response.data.progress
+                    progress: response.data.progress,
+                    id: response.data.id
                 })   
             })
             .catch(function (error) {
@@ -54,13 +57,17 @@ export default class EditBook extends Component {
         const newBook = {
             description: this.state.description,
             progress: this.state.progress,
+            id: this.state.id,
             name: this.state.name
         };
+        const edit_component = this;
         console.log(newBook);
         axios.post(API + 'update_book', newBook)
-            .then(res => console.log(res.data));
-        
-        this.props.history.push('/');
+            .then(function (res) {
+                console.log(res.data);
+                edit_component.props.history.push('/');
+            });
+
     }
     render() {
         return (
