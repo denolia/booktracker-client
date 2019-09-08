@@ -4,7 +4,7 @@ import API from '../environment'
 
 
 export default class EditBook extends Component {
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
@@ -20,19 +20,19 @@ export default class EditBook extends Component {
 
     }
 
-    onChangeDescription(e) {
+    private onChangeDescription(e: Event) {
         this.setState({
             description: e.target.value
         });
     }
 
-    onChangeName(e) {
+    private onChangeName(e: Event) {
         this.setState({
             name: e.target.value
         });
     }
 
-    onChangeProgress(e) {
+    private onChangeProgress(e: Event) {
         this.setState({
             progress: e.target.value
         });
@@ -52,7 +52,7 @@ export default class EditBook extends Component {
                 console.log(error);
             })
     }
-    onSubmit(e) {
+    private onSubmit(e: Event) {
         e.preventDefault();
         const newBook = {
             description: this.state.description,

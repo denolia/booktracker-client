@@ -4,44 +4,49 @@ import axios from 'axios';
 import API from '../environment.js'
 
 
-interface MyBook {
+interface IBook {
     name: string,
     description: string,
     progress: number,
     id: string
 }
 
-const Book = function(props: {book: MyBook, key: string}){ (
-    <tr>
-        <td>{props.book.name}</td>
-        <td>{props.book.description}</td>
-        <td>{props.book.progress}</td>
-        <td>
-            <Link to={"/edit/"+props.book.id}>Edit</Link>
-        </td>
-    </tr>
-)
+const BookTableRow = function (props: { book: IBook, key: number }) {
+    (
+        <tr>
+            <td>{props.book.name}</td>
+            <td>{props.book.description}</td>
+            <td>{props.book.progress}</td>
+            <td>
+                <Link to={"/edit/" + props.book.id}>Edit</Link>
+            </td>
+        </tr>
+    )
 }
 
-export default class BookList extends Component {
-    constructor(props) {
+interface IBookList {
+    books: IBook[];
+};
+
+export default class BookList extends Component<object, IBookList> {
+    constructor(props: {}) {
         super(props);
-        this.state = {books: []};
+        this.state = { books: [] };
     }
     componentDidMount() {
         axios.get(API + 'books')
             .then(response => {
                 this.setState({ books: response.data });
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.log(error);
             })
     }
     bookList() {
         return this.state.books.map(
-            function(currentBook, i){
-            return <Book book={currentBook} key={i} />;
-        })
+            function (currentBook: IBook, i: number) {
+                return <BookTableRow book={currentBook} key={i} />;
+            })
     }
     render() {
         return (
@@ -57,7 +62,7 @@ export default class BookList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.bookList() }
+                        {this.bookList()}
                     </tbody>
                 </table>
             </div>
