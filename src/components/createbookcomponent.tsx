@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import API from '../environment'
+import { FormEvent, ChangeEvent } from 'react';
 
 export default class CreateBook extends React.Component<any, any> {
     constructor(props: {}) {
@@ -17,25 +18,25 @@ export default class CreateBook extends React.Component<any, any> {
         this.onSubmit = this.onSubmit.bind(this);
     } 
 
-    private onChangeDescription(e: Event) {
+    private onChangeDescription(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             description: e.target.value
         });
     }
 
-    private onChangeName(e: Event) {
+    private onChangeName(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             name: e.target.value
         });
     }
 
-    private onChangeProgress(e: Event) {
+    private onChangeProgress(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
             progress: e.target.value
         });
     }
 
-    private onSubmit(e: Event) {
+    private onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         
         console.log(`Form submitted:`);
