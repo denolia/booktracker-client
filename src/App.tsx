@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// const css = require("bootstrap/dist/css/bootstrap.min.css");
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import CreateBook from "./components/createbookcomponent"
 import EditBook from "./components/editbookcomponent"
