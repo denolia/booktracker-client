@@ -6,7 +6,7 @@ import { FormEvent, ChangeEvent } from 'react';
 export default class CreateBook extends React.Component<any, any> {
     constructor(props: {}) {
         super(props);
-        
+
         this.state = {
             name: '',
             description: '',
@@ -16,7 +16,7 @@ export default class CreateBook extends React.Component<any, any> {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeProgress = this.onChangeProgress.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    } 
+    }
 
     private onChangeDescription(e: ChangeEvent<HTMLInputElement>) {
         this.setState({
@@ -38,7 +38,7 @@ export default class CreateBook extends React.Component<any, any> {
 
     private onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        
+
         console.log(`Form submitted:`);
         console.log(`Name: ${this.state.name}`);
         console.log(`Description: ${this.state.description}`);
@@ -50,7 +50,7 @@ export default class CreateBook extends React.Component<any, any> {
             name: this.state.name
         };
         axios.post(API + 'update_book', newBook)
-        .then(res => console.log(res.data));
+            .then(res => console.log(res.data));
 
         this.setState({
             name: '',
@@ -61,36 +61,36 @@ export default class CreateBook extends React.Component<any, any> {
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
+            <div style={{ marginTop: 10 }}>
                 <h3>Create New Book Record</h3>
                 <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                    <label>Name: </label>
-                        <input 
-                                type="text" 
-                                className="form-control"
-                                value={this.state.name}
-                                onChange={this.onChangeName}
-                                />
+                    <div className="form-group">
+                        <label>Name: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={this.state.name}
+                            onChange={this.onChangeName}
+                        />
                     </div>
-                    <div className="form-group"> 
+                    <div className="form-group">
                         <label>Description: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                />
+                        <input type="text"
+                            className="form-control"
+                            value={this.state.description}
+                            onChange={this.onChangeDescription}
+                        />
                     </div>
-                   
-                    <div className="form-group"> 
+
+                    <div className="form-group">
                         <label>Progress: </label>
-                        <input  type="number"
-                                className="form-control"
-                                min="0" 
-                                max="100"
-                                value={this.state.progress}
-                                onChange={this.onChangeProgress}
-                                />
+                        <input type="number"
+                            className="form-control"
+                            min="0"
+                            max="100"
+                            value={this.state.progress}
+                            onChange={this.onChangeProgress}
+                        />
                     </div>
 
                     <div className="form-group">

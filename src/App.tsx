@@ -28,13 +28,13 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-          <br/>
-        <Route path="/" exact component={BookList} />
-        <Route path="/edit/:id" component={EditBook} />
-        <Route path="/create" component={CreateBook} />
+          <br />
+          <Route path="/" exact component={BookList} />
+          <Route path="/edit/:id" component={EditBook} />
+          <Route path="/create" component={CreateBook} />
         </div>
       </Router>
-      
+
     );
   }
 }
