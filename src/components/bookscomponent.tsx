@@ -11,7 +11,7 @@ interface IBook {
     id: string
 }
 
-const BookTableRow = function (props: { book: IBook, key: number }) {
+const BookTableRow = (props: { book: IBook, key: number }) =>
     (
         <tr>
             <td>{props.book.name}</td>
@@ -22,7 +22,7 @@ const BookTableRow = function (props: { book: IBook, key: number }) {
             </td>
         </tr>
     )
-}
+
 
 interface IBookList {
     books: IBook[];
