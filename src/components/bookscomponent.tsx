@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import API from '../environment.js'
 
-const Book = props => (
+
+interface MyBook {
+    name: string,
+    description: string,
+    progress: number,
+    id: string
+}
+
+const Book = function(props: {book: MyBook, key: string}){ (
     <tr>
         <td>{props.book.name}</td>
         <td>{props.book.description}</td>
@@ -13,6 +21,7 @@ const Book = props => (
         </td>
     </tr>
 )
+}
 
 export default class BookList extends Component {
     constructor(props) {

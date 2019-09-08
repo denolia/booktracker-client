@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+// const css = require("bootstrap/dist/css/bootstrap.min.css");
 
 import CreateBook from "./components/createbookcomponent"
 import EditBook from "./components/editbookcomponent"
@@ -13,7 +13,7 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" target="_blank">
+            <a className="navbar-brand" target="_blank">
               <img src="logo.png" width="30" height="30" />
             </a>
             <Link to="/" className="navbar-brand"> Book App</Link>

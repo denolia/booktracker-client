@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import axios from 'axios';
 import API from '../environment'
 
+interface Book {
 
-export default class CreateBook extends Component {
+}
+
+export default class CreateBook extends React.Component<any, any> {
     constructor(props) {
         super(props);
         
