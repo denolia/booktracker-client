@@ -10,6 +10,7 @@ interface State {
     progress: string
 }
 
+type StateKeys = keyof State;
 
 // this is what we expect coming from '/edit/:id' to 'this.props.match.params.*'
 type PathParamsType = {
@@ -26,30 +27,11 @@ export default class EditBook extends Component<RouteComponentProps<PathParamsTy
             description: '',
             progress: ''
         }
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeProgress = this.onChangeProgress.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
     }
 
-    private onChangeDescription(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            description: e.target.value
-        });
-    }
-
-    private onChangeName(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            name: e.target.value
-        });
-    }
-
-    private onChangeProgress(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            progress: e.target.value
-        });
-    }
     componentDidMount() {
         axios.get(API + 'book?id=' + this.props.match.params.id)
             .then(response => {
@@ -65,6 +47,17 @@ export default class EditBook extends Component<RouteComponentProps<PathParamsTy
                 console.log(error);
             })
     }
+
+    private onChange(e: ChangeEvent<HTMLInputElement>) {
+        const name = e.target.name as StateKeys
+        const value: string = e.target.value
+
+        this.setState(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      }
+
     private onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const newBook = {
@@ -93,7 +86,8 @@ export default class EditBook extends Component<RouteComponentProps<PathParamsTy
                             type="text"
                             className="form-control"
                             value={this.state.name}
-                            onChange={this.onChangeName}
+                            name="name"
+                            onChange={this.onChange}
                         />
                     </div>
                     <div className="form-group">
@@ -101,7 +95,8 @@ export default class EditBook extends Component<RouteComponentProps<PathParamsTy
                         <input type="text"
                             className="form-control"
                             value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            name="description"
+                            onChange={this.onChange}
                         />
                     </div>
 
@@ -112,7 +107,8 @@ export default class EditBook extends Component<RouteComponentProps<PathParamsTy
                             min="0"
                             max="100"
                             value={this.state.progress}
-                            onChange={this.onChangeProgress}
+                            name="progress"
+                            onChange={this.onChange}
                         />
                     </div>
 

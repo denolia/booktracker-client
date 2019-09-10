@@ -2,9 +2,18 @@ import * as React from 'react';
 import axios from 'axios';
 import API from '../environment'
 import { FormEvent, ChangeEvent } from 'react';
+import { RouteComponentProps } from 'react-router';
 
-export default class CreateBook extends React.Component<any, any> {
-    constructor(props: {}) {
+interface State {
+    name: string,
+    description: string,
+    progress: string
+}
+
+type StateKeys = keyof State;
+
+export default class CreateBook extends React.Component<RouteComponentProps, State> {
+    constructor(props: RouteComponentProps) {
         super(props);
 
         this.state = {
@@ -12,28 +21,17 @@ export default class CreateBook extends React.Component<any, any> {
             description: '',
             progress: ''
         }
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeProgress = this.onChangeProgress.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    private onChangeDescription(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            description: e.target.value
-        });
-    }
-
-    private onChangeName(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            name: e.target.value
-        });
-    }
-
-    private onChangeProgress(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            progress: e.target.value
-        });
+    private onChange(e: ChangeEvent<HTMLInputElement>) {
+        const name = e.target.name as StateKeys
+        const value: string = e.target.value
+        this.setState(prevState => ({
+            ...prevState,
+            [name]: value
+          }));
     }
 
     private onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -70,7 +68,8 @@ export default class CreateBook extends React.Component<any, any> {
                             type="text"
                             className="form-control"
                             value={this.state.name}
-                            onChange={this.onChangeName}
+                            name="name"
+                            onChange={this.onChange}
                         />
                     </div>
                     <div className="form-group">
@@ -78,7 +77,8 @@ export default class CreateBook extends React.Component<any, any> {
                         <input type="text"
                             className="form-control"
                             value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            name="description"
+                            onChange={this.onChange}
                         />
                     </div>
 
@@ -89,7 +89,8 @@ export default class CreateBook extends React.Component<any, any> {
                             min="0"
                             max="100"
                             value={this.state.progress}
-                            onChange={this.onChangeProgress}
+                            name="progress"
+                            onChange={this.onChange}
                         />
                     </div>
 
