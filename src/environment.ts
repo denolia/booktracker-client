@@ -1,2 +1,2 @@
-export const API = 'https://demoth.dev/api/';
-// const API = '/api/';
+// export const API = 'https://demoth.dev/api/';
+export const API = '/api/';
