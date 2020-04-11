@@ -28,6 +28,10 @@
     "jest/valid-expect": "error",
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["draft"] }
+    ]
   }
 }
