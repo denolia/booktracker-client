@@ -19,8 +19,8 @@ type PathParamsType = {
 };
 
 export class EditBook extends Component<
-  RouteComponentProps<PathParamsType>,
-  State
+RouteComponentProps<PathParamsType>,
+State
 > {
   constructor(props: RouteComponentProps<PathParamsType>) {
     super(props);
@@ -40,16 +40,12 @@ export class EditBook extends Component<
     axios
       .get(`${API}book?id=${match.params.id}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           name: response.data.name,
           description: response.data.description,
           progress: response.data.progress,
           id: response.data.id,
         });
-      })
-      .catch((error) => {
-        console.log(error);
       });
   }
 
@@ -73,7 +69,7 @@ export class EditBook extends Component<
       name,
     };
     const editComponent = this;
-    axios.post(`${API}update_book`, newBook).then((res) => {
+    axios.post(`${API}update_book`, newBook).then(() => {
       editComponent.props.history.push('/');
     });
   }

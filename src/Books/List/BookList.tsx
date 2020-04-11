@@ -15,14 +15,9 @@ export class BookList extends Component<object, IBookList> {
   }
 
   componentDidMount() {
-    axios
-      .get(`${API}books`)
-      .then((response) => {
-        this.setState({ books: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.get(`${API}books`).then((response) => {
+      this.setState({ books: response.data });
+    });
   }
 
   bookList() {
