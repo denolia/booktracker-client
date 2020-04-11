@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BookList from "./Books/List/bookscomponent";
-import EditBook from "./Books/Editor/editbookcomponent";
-import CreateBook from "./Books/Editor/createbookcomponent";
+import BookList from "./Books/List/BookList";
+import EditBook from "./Books/Editor/EditBook";
+import CreateBook from "./Books/Editor/CreateBook";
 
 class App extends Component {
   render() {
