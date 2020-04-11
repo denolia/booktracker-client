@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API } from '../../environment';
-
-interface IBook {
-  name: string;
-  description: string;
-  progress: number;
-  id: string;
-}
-
-const BookTableRow = (props: { book: IBook; key: number }) => (
-  <tr>
-    <td>{props.book.name}</td>
-    <td>{props.book.description}</td>
-    <td>{props.book.progress}</td>
-    <td>
-      <Link to={`/edit/${props.book.id}`}>Edit</Link>
-    </td>
-  </tr>
-);
+import { BookTableRow } from './BookTableRow';
+import { IBook } from './interfaces/IBook';
 
 interface IBookList {
   books: IBook[];
@@ -43,8 +26,9 @@ export class BookList extends Component<object, IBookList> {
   }
 
   bookList() {
-    return this.state.books.map((currentBook: IBook, i: number) => (
-      <BookTableRow book={currentBook} key={i} />
+    const { books } = this.state;
+    return books.map((book: IBook) => (
+      <BookTableRow book={book} key={book.id} />
     ));
   }
 
