@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { API } from "../../environment";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { API } from '../../environment';
 
 interface IBook {
   name: string;
@@ -16,7 +16,7 @@ const BookTableRow = (props: { book: IBook; key: number }) => (
     <td>{props.book.description}</td>
     <td>{props.book.progress}</td>
     <td>
-      <Link to={"/edit/" + props.book.id}>Edit</Link>
+      <Link to={'/edit/' + props.book.id}>Edit</Link>
     </td>
   </tr>
 );
@@ -32,7 +32,7 @@ export default class BookList extends Component<object, IBookList> {
   }
   componentDidMount() {
     axios
-      .get(API + "books")
+      .get(API + 'books')
       .then((response) => {
         this.setState({ books: response.data });
       })

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import BookList from "./Books/List/BookList";
-import EditBook from "./Books/Editor/EditBook";
-import CreateBook from "./Books/Editor/CreateBook";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import BookList from './Books/List/BookList';
+import EditBook from './Books/Editor/EditBook';
+import CreateBook from './Books/Editor/CreateBook';
 
 class App extends Component {
   render() {
@@ -12,10 +12,10 @@ class App extends Component {
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" target="_blank" href="/">
-              <img src="logo.png" width="30" height="30" alt={"Logo"} />
+              <img src="logo.png" width="30" height="30" alt={'Logo'} />
             </a>
             <Link to="/" className="navbar-brand">
-              {" "}
+              {' '}
               Book App
             </Link>
             <div className="collapse navbar-collapse">

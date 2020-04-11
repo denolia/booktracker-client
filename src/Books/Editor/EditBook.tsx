@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Component, FormEvent } from "react";
-import axios from "axios";
-import { RouteComponentProps } from "react-router";
-import { API } from "../../environment";
+import React, { ChangeEvent, Component, FormEvent } from 'react';
+import axios from 'axios';
+import { RouteComponentProps } from 'react-router';
+import { API } from '../../environment';
 
 interface State {
   name: string;
@@ -25,10 +25,10 @@ export default class EditBook extends Component<
     super(props);
 
     this.state = {
-      name: "",
-      id: "",
-      description: "",
-      progress: "",
+      name: '',
+      id: '',
+      description: '',
+      progress: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -36,7 +36,7 @@ export default class EditBook extends Component<
 
   componentDidMount() {
     axios
-      .get(API + "book?id=" + this.props.match.params.id)
+      .get(API + 'book?id=' + this.props.match.params.id)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -71,15 +71,15 @@ export default class EditBook extends Component<
     };
     const edit_component = this;
     console.log(newBook);
-    axios.post(API + "update_book", newBook).then(function (res) {
+    axios.post(API + 'update_book', newBook).then(function (res) {
       console.log(res.data);
-      edit_component.props.history.push("/");
+      edit_component.props.history.push('/');
     });
   }
   render() {
     return (
       <div style={{ marginTop: 10 }}>
-        <h3 style={{ textAlign: "center" }}>Edit Book</h3>
+        <h3 style={{ textAlign: 'center' }}>Edit Book</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Name: </label>

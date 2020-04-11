@@ -1,8 +1,8 @@
-import * as React from "react";
-import { ChangeEvent, FormEvent } from "react";
-import axios from "axios";
-import { RouteComponentProps } from "react-router";
-import { API } from "../../environment";
+import * as React from 'react';
+import { ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
+import { RouteComponentProps } from 'react-router';
+import { API } from '../../environment';
 
 interface State {
   name: string;
@@ -20,9 +20,9 @@ export default class CreateBook extends React.Component<
     super(props);
 
     this.state = {
-      name: "",
-      description: "",
-      progress: "",
+      name: '',
+      description: '',
+      progress: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -51,13 +51,13 @@ export default class CreateBook extends React.Component<
       name: this.state.name,
     };
     axios
-      .post(API + "update_book", newBook)
+      .post(API + 'update_book', newBook)
       .then((res) => console.log(res.data));
 
     this.setState({
-      name: "",
-      description: "",
-      progress: "",
+      name: '',
+      description: '',
+      progress: '',
     });
   }
 
