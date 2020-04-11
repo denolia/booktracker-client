@@ -1,26 +1,32 @@
-import * as React from "react";
-import { ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, Component, FormEvent } from "react";
 import axios from "axios";
-import { API } from "../environment";
 import { RouteComponentProps } from "react-router";
+import { API } from "../../environment";
 
 interface State {
   name: string;
+  id: string;
   description: string;
   progress: string;
 }
 
 type StateKeys = keyof State;
 
-export default class CreateBook extends React.Component<
-  RouteComponentProps,
+// this is what we expect coming from '/edit/:id' to 'this.props.match.params.*'
+type PathParamsType = {
+  id: string;
+};
+
+export default class EditBook extends Component<
+  RouteComponentProps<PathParamsType>,
   State
 > {
-  constructor(props: RouteComponentProps) {
+  constructor(props: RouteComponentProps<PathParamsType>) {
     super(props);
 
     this.state = {
       name: "",
+      id: "",
       description: "",
       progress: "",
     };
@@ -28,9 +34,27 @@ export default class CreateBook extends React.Component<
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    axios
+      .get(API + "book?id=" + this.props.match.params.id)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          name: response.data.name,
+          description: response.data.description,
+          progress: response.data.progress,
+          id: response.data.id,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   private onChange(e: ChangeEvent<HTMLInputElement>) {
     const name = e.target.name as StateKeys;
     const value: string = e.target.value;
+
     this.setState((prevState) => ({
       ...prevState,
       [name]: value,
@@ -39,32 +63,23 @@ export default class CreateBook extends React.Component<
 
   private onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    console.log(`Form submitted:`);
-    console.log(`Name: ${this.state.name}`);
-    console.log(`Description: ${this.state.description}`);
-    console.log(`Progress: ${this.state.progress}`);
-
     const newBook = {
       description: this.state.description,
       progress: this.state.progress,
+      id: this.state.id,
       name: this.state.name,
     };
-    axios
-      .post(API + "update_book", newBook)
-      .then((res) => console.log(res.data));
-
-    this.setState({
-      name: "",
-      description: "",
-      progress: "",
+    const edit_component = this;
+    console.log(newBook);
+    axios.post(API + "update_book", newBook).then(function (res) {
+      console.log(res.data);
+      edit_component.props.history.push("/");
     });
   }
-
   render() {
     return (
       <div style={{ marginTop: 10 }}>
-        <h3>Create New Book Record</h3>
+        <h3 style={{ textAlign: "center" }}>Edit Book</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Name: </label>
@@ -103,7 +118,7 @@ export default class CreateBook extends React.Component<
           <div className="form-group">
             <input
               type="submit"
-              value="Create Book"
+              value="Update Book"
               className="btn btn-primary"
             />
           </div>
