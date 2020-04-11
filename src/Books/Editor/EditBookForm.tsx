@@ -21,10 +21,10 @@ export function EditBookForm({
 }: IProps) {
   return (
     <div style={{ marginTop: 10 }}>
-      <h3 style={{ textAlign: 'center' }}>{title}</h3>
+      <h3>{title}</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="name">
+          <label htmlFor="name" style={{ width: '100%' }}>
             Name:
             <input
               type="text"
@@ -37,7 +37,7 @@ export function EditBookForm({
           </label>
         </div>
         <div className="form-group">
-          <label htmlFor="description">
+          <label htmlFor="description" style={{ width: '100%' }}>
             Description:
             <input
               type="text"
@@ -51,7 +51,7 @@ export function EditBookForm({
         </div>
 
         <div className="form-group">
-          <label htmlFor="progress">
+          <label htmlFor="progress" style={{ width: '100%' }}>
             Progress:
             <input
               type="number"
