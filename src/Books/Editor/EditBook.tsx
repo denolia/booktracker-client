@@ -18,7 +18,10 @@ type PathParamsType = {
   id: string;
 };
 
-export class EditBook extends Component<RouteComponentProps<PathParamsType>, State> {
+export class EditBook extends Component<
+  RouteComponentProps<PathParamsType>,
+  State
+> {
   constructor(props: RouteComponentProps<PathParamsType>) {
     super(props);
 
@@ -70,9 +73,7 @@ export class EditBook extends Component<RouteComponentProps<PathParamsType>, Sta
       name,
     };
     const editComponent = this;
-    console.log(newBook);
     axios.post(`${API}update_book`, newBook).then((res) => {
-      console.log(res.data);
       editComponent.props.history.push('/');
     });
   }

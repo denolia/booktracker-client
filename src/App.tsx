@@ -15,7 +15,7 @@ export function App() {
           </a>
           <Link to="/" className="navbar-brand">
             {' '}
-            Book App
+            Book Tracker
           </Link>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">

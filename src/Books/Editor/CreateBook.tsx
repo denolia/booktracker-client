@@ -39,19 +39,12 @@ export class CreateBook extends React.Component<RouteComponentProps, State> {
     e.preventDefault();
 
     const { description, name, progress } = this.state;
-    console.log('Form submitted:');
-    console.log(`Name: ${name}`);
-    console.log(`Description: ${description}`);
-    console.log(`Progress: ${progress}`);
-
     const newBook = {
       description,
       progress,
       name,
     };
-    axios
-      .post(`${API}update_book`, newBook)
-      .then((res) => console.log(res.data));
+    axios.post(`${API}update_book`, newBook).then((r) => r);
 
     this.setState({
       name: '',
