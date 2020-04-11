@@ -2,6 +2,7 @@ import React, { ChangeEvent, Component, FormEvent } from 'react';
 import axios from 'axios';
 import { RouteComponentProps } from 'react-router';
 import { API } from '../../environment';
+import { EditBookForm } from './EditBookForm';
 
 interface State {
   name: string;
@@ -17,10 +18,7 @@ type PathParamsType = {
   id: string;
 };
 
-export default class EditBook extends Component<
-  RouteComponentProps<PathParamsType>,
-  State
-> {
+export class EditBook extends Component<RouteComponentProps<PathParamsType>, State> {
   constructor(props: RouteComponentProps<PathParamsType>) {
     super(props);
 
@@ -35,8 +33,9 @@ export default class EditBook extends Component<
   }
 
   componentDidMount() {
+    const { match } = this.props;
     axios
-      .get(API + 'book?id=' + this.props.match.params.id)
+      .get(`${API}book?id=${match.params.id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -46,14 +45,14 @@ export default class EditBook extends Component<
           id: response.data.id,
         });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
 
   private onChange(e: ChangeEvent<HTMLInputElement>) {
     const name = e.target.name as StateKeys;
-    const value: string = e.target.value;
+    const { value } = e.target;
 
     this.setState((prevState) => ({
       ...prevState,
@@ -63,67 +62,33 @@ export default class EditBook extends Component<
 
   private onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const { description, id, name, progress } = this.state;
     const newBook = {
-      description: this.state.description,
-      progress: this.state.progress,
-      id: this.state.id,
-      name: this.state.name,
+      description,
+      progress,
+      id,
+      name,
     };
-    const edit_component = this;
+    const editComponent = this;
     console.log(newBook);
-    axios.post(API + 'update_book', newBook).then(function (res) {
+    axios.post(`${API}update_book`, newBook).then((res) => {
       console.log(res.data);
-      edit_component.props.history.push('/');
+      editComponent.props.history.push('/');
     });
   }
+
   render() {
+    const { description, name, progress } = this.state;
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3 style={{ textAlign: 'center' }}>Edit Book</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.name}
-              name="name"
-              onChange={this.onChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Description: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.description}
-              name="description"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Progress: </label>
-            <input
-              type="number"
-              className="form-control"
-              min="0"
-              max="100"
-              value={this.state.progress}
-              name="progress"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Update Book"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
-      </div>
+      <EditBookForm
+        onSubmit={this.onSubmit}
+        name={name}
+        onChange={this.onChange}
+        description={description}
+        progress={progress}
+        submitButtonText="Update Book"
+        title="Edit Book"
+      />
     );
   }
 }

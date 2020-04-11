@@ -16,7 +16,7 @@ const BookTableRow = (props: { book: IBook; key: number }) => (
     <td>{props.book.description}</td>
     <td>{props.book.progress}</td>
     <td>
-      <Link to={'/edit/' + props.book.id}>Edit</Link>
+      <Link to={`/edit/${props.book.id}`}>Edit</Link>
     </td>
   </tr>
 );
@@ -25,26 +25,29 @@ interface IBookList {
   books: IBook[];
 }
 
-export default class BookList extends Component<object, IBookList> {
+export class BookList extends Component<object, IBookList> {
   constructor(props: {}) {
     super(props);
     this.state = { books: [] };
   }
+
   componentDidMount() {
     axios
-      .get(API + 'books')
+      .get(`${API}books`)
       .then((response) => {
         this.setState({ books: response.data });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
+
   bookList() {
-    return this.state.books.map(function (currentBook: IBook, i: number) {
-      return <BookTableRow book={currentBook} key={i} />;
-    });
+    return this.state.books.map((currentBook: IBook, i: number) => (
+      <BookTableRow book={currentBook} key={i} />
+    ));
   }
+
   render() {
     return (
       <div>
