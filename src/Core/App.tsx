@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BookList } from './Books/List/BookList';
-import { EditBook } from './Books/Editor/EditBook';
-import { CreateBook } from './Books/Editor/CreateBook';
+import { BookList } from '../Books/List/BookList';
+import { CreateBook } from '../Books/Editor/CreateBook';
+import { EditBook } from '../Books/Editor/EditBook';
+
 
 export function App() {
   return (
