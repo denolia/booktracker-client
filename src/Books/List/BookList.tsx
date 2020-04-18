@@ -13,14 +13,8 @@ export class BookList extends Component<IProps> {
     getAllBooks();
   }
 
-  bookList() {
-    const { books } = this.props;
-    return books.map((book: IBook) => (
-      <BookTableRow book={book} key={book.id} />
-    ));
-  }
-
   render() {
+    const { books } = this.props;
     return (
       <div>
         <h3>Books List</h3>
@@ -33,7 +27,11 @@ export class BookList extends Component<IProps> {
               <th> </th>
             </tr>
           </thead>
-          <tbody>{this.bookList()}</tbody>
+          <tbody>
+            {books.map((book: IBook) => (
+              <BookTableRow book={book} key={book.id} />
+            ))}
+          </tbody>
         </table>
       </div>
     );
