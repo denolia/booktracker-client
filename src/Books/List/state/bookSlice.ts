@@ -9,6 +9,16 @@ export const bookSlice = createSlice({
     addBook(state, action) {
       state.books.push(action.payload);
     },
+    updateBook(state, action) {
+      const currentBook = state.books.find(
+        (book) => book.id === action.payload.id,
+      );
+      if (currentBook !== undefined) {
+        currentBook.description = action.payload.description;
+        currentBook.name = action.payload.name;
+        currentBook.progress = action.payload.progress;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (draft, { payload }) => {

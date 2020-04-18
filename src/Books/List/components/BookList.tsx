@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BookTableRow } from './BookTableRow';
-import { IBook } from './interfaces/IBook';
+import { IBook } from '../interfaces/IBook';
 
 interface IProps {
   books: IBook[];
@@ -29,7 +29,7 @@ export class BookList extends Component<IProps> {
           </thead>
           <tbody>
             {books.map((book: IBook) => (
-              <BookTableRow book={book} key={book.id} />
+              <BookTableRow book={book} key={book.id as string} />
             ))}
           </tbody>
         </table>

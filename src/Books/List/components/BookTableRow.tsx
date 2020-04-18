@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { IBook } from './interfaces/IBook';
+import { IBook } from '../interfaces/IBook';
 
 interface IProps {
   book: IBook;

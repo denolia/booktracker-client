@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CreateBook } from '../Books/Editor/CreateBook';
-import { EditBook } from '../Books/Editor/EditBook';
+import { CreateBook } from '../Books/Editor/components/CreateBook';
+import { EditBook } from '../Books/Editor/components/EditBook';
 import { BookListContainer } from '../Books/List/containers/BookListContainer';
 
 

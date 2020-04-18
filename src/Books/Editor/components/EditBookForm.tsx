@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
+import { IBook } from '../../List/interfaces/IBook';
 
 interface IProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  description: string;
-  progress: string;
+  onSubmit: (book: IBook) => void;
+  currentName: string;
+  currentDescription: string;
+  currentProgress: Number;
   submitButtonText: string;
   title: string;
+  id?: string;
 }
 
 export function EditBookForm({
   onSubmit,
-  description,
-  onChange,
-  name,
-  progress,
+  currentDescription,
+  currentName,
+  currentProgress,
   submitButtonText,
+  id,
   title,
 }: IProps) {
+  const [name, setName] = useState(currentName); // this should be initialized right with the correct data
+  const [description, setDescription] = useState(currentDescription);
+  const [progress, setProgress] = useState(currentProgress);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    onSubmit({
+      description,
+      progress,
+      id,
+      name,
+    } as IBook);
+  }
+
   return (
     <div style={{ marginTop: 10 }}>
       <h3>{title}</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name" style={{ width: '100%' }}>
             Name:
@@ -32,7 +47,7 @@ export function EditBookForm({
               value={name}
               name="name"
               id="name"
-              onChange={onChange}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
         </div>
@@ -45,7 +60,7 @@ export function EditBookForm({
               value={description}
               name="description"
               id="description"
-              onChange={onChange}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
         </div>
@@ -58,10 +73,10 @@ export function EditBookForm({
               className="form-control"
               min="0"
               max="100"
-              value={progress}
+              value={progress.toString()}
               name="progress"
               id="progress"
-              onChange={onChange}
+              onChange={(e) => setProgress(Number(e.target.value))}
             />
           </label>
         </div>
