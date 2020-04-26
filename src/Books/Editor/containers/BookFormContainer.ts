@@ -10,11 +10,12 @@ const mapDispatchToProps = (
   ownProps: { setEditFinished?: () => void },
 ) => ({
   onSubmit: (book: IBook) => {
-    updateBook(book); // todo handle errors
-    dispatch(bookSlice.actions.updateBook(book));
-    if (ownProps?.setEditFinished !== undefined) {
-      ownProps.setEditFinished();
-    }
+    updateBook(book).then(() => {
+      dispatch(bookSlice.actions.updateBook(book));
+      if (ownProps?.setEditFinished !== undefined) {
+        ownProps.setEditFinished();
+      }
+    }); // todo handle errors
   },
 });
 
