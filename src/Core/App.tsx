@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BookList } from '../Books/List/BookList';
-import { CreateBook } from '../Books/Editor/CreateBook';
-import { EditBook } from '../Books/Editor/EditBook';
+import { CreateBook } from '../Books/Editor/components/CreateBook';
+import { EditBook } from '../Books/Editor/components/EditBook';
+import { BookListContainer } from '../Books/List/containers/BookListContainer';
 
 
 export function App() {
@@ -34,7 +34,7 @@ export function App() {
           </div>
         </nav>
         <br />
-        <Route path="/" exact component={BookList} />
+        <Route path="/" exact component={BookListContainer} />
         <Route path="/edit/:id" component={EditBook} />
         <Route path="/create" component={CreateBook} />
       </div>
