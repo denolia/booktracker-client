@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BookTableRow } from './BookTableRow';
 import { IBook } from '../interfaces/IBook';
 
