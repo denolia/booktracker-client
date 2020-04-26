@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { CreateBook } from '../Books/Editor/components/CreateBook';
 import { EditBook } from '../Books/Editor/components/EditBook';
 import { BookListContainer } from '../Books/List/containers/BookListContainer';
-
+import Logo from '../assets/logo.png';
 
 export function App() {
   return (
@@ -12,7 +12,7 @@ export function App() {
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" target="_blank" href="/">
-            <img src="logo.png" width="30" height="30" alt="Logo" />
+            <img src={Logo} width="30" height="30" alt="Logo" />
           </a>
           <Link to="/" className="navbar-brand">
             {' '}
