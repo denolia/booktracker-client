@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router';
+import { Redirect, RouteComponentProps } from 'react-router';
 import { fetchBookById } from '../state/fetchBookById';
 import { IBook } from '../../List/interfaces/IBook';
 import { BookFormContainer } from '../containers/BookFormContainer';
@@ -11,6 +11,7 @@ type PathParamsType = {
 interface IState {
   book?: IBook;
   loading: boolean;
+  editFinished: boolean;
 }
 
 export class EditBook extends Component<
@@ -22,6 +23,7 @@ export class EditBook extends Component<
 
     this.state = {
       loading: true,
+      editFinished: false,
     };
   }
 
@@ -33,10 +35,14 @@ export class EditBook extends Component<
   }
 
   render() {
-    const { book, loading } = this.state;
+    const { book, loading, editFinished } = this.state;
 
     if (loading) {
       return 'Loading...';
+    }
+
+    if (editFinished) {
+      return <Redirect to="/" />;
     }
 
     if (book === undefined) {
@@ -45,6 +51,7 @@ export class EditBook extends Component<
 
     return (
       <BookFormContainer
+        setEditFinished={() => this.setState({ editFinished: true })}
         currentBook={book}
         submitButtonText="Update Book"
         title="Edit Book"

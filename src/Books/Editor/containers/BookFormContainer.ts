@@ -5,11 +5,16 @@ import { IBook } from '../../List/interfaces/IBook';
 import { updateBook } from '../state/updateBook';
 import { bookSlice } from '../../List/state/bookSlice';
 
-const mapDispatchToProps = (dispatch: TDispatch) => ({
+const mapDispatchToProps = (
+  dispatch: TDispatch,
+  ownProps: { setEditFinished?: () => void },
+) => ({
   onSubmit: (book: IBook) => {
     updateBook(book); // todo handle errors
     dispatch(bookSlice.actions.updateBook(book));
-    // todo redirect to the index page for edit and clean state for create
+    if (ownProps?.setEditFinished !== undefined) {
+      ownProps.setEditFinished();
+    }
   },
 });
 
