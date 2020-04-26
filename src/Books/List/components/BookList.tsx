@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { BookTableRow } from './BookTableRow';
 import { IBook } from '../interfaces/IBook';
 
@@ -7,33 +7,29 @@ interface IProps {
   getAllBooks: () => void;
 }
 
-export class BookList extends Component<IProps> {
-  componentDidMount() {
-    const { getAllBooks } = this.props;
+export function BookList({ books, getAllBooks }: IProps) {
+  useEffect(() => {
     getAllBooks();
-  }
+  });
 
-  render() {
-    const { books } = this.props;
-    return (
-      <div>
-        <h3>Books List</h3>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Progress</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book: IBook) => (
-              <BookTableRow book={book} key={book.id as string} />
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h3>Books List</h3>
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Progress</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book: IBook) => (
+            <BookTableRow book={book} key={book.id as string} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
