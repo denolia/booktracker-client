@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BookFormContainer } from '../containers/BookFormContainer';
 
-export function CreateBook() {
+export function CreateBookPage() {
   return (
     <BookFormContainer
       submitButtonText="Create Book"

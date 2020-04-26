@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CreateBook } from '../Books/Editor/components/CreateBook';
-import { EditBook } from '../Books/Editor/components/EditBook';
+import { CreateBookPage } from '../Books/Editor/components/CreateBookPage';
+import { EditPage } from '../Books/Editor/components/EditPage';
 import { BookListContainer } from '../Books/List/containers/BookListContainer';
 import Logo from '../assets/logo.png';
 
@@ -34,9 +34,10 @@ export function App() {
           </div>
         </nav>
         <br />
+
         <Route path="/" exact component={BookListContainer} />
-        <Route path="/edit/:id" component={EditBook} />
-        <Route path="/create" component={CreateBook} />
+        <Route path="/edit/:id" component={EditPage} />
+        <Route path="/create" component={CreateBookPage} />
       </div>
     </Router>
   );
