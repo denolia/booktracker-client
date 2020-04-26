@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { TDispatch } from '../../../Core/State/store';
-import { EditBookForm } from '../components/EditBookForm';
+import { BookForm } from '../components/BookForm';
 import { IBook } from '../../List/interfaces/IBook';
 import { updateBook } from '../state/updateBook';
 import { bookSlice } from '../../List/state/bookSlice';
@@ -13,7 +13,4 @@ const mapDispatchToProps = (dispatch: TDispatch) => ({
   },
 });
 
-export const EditBookFormContainer = connect(
-  null,
-  mapDispatchToProps,
-)(EditBookForm);
+export const BookFormContainer = connect(null, mapDispatchToProps)(BookForm);

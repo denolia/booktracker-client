@@ -3,34 +3,30 @@ import { IBook } from '../../List/interfaces/IBook';
 
 interface IProps {
   onSubmit: (book: IBook) => void;
-  currentName: string;
-  currentDescription: string;
-  currentProgress: Number;
   submitButtonText: string;
   title: string;
-  id?: string;
+  currentBook?: IBook;
 }
 
-export function EditBookForm({
+export function BookForm({
   onSubmit,
-  currentDescription,
-  currentName,
-  currentProgress,
   submitButtonText,
-  id,
+  currentBook,
   title,
 }: IProps) {
-  const [name, setName] = useState(currentName); // this should be initialized right with the correct data
-  const [description, setDescription] = useState(currentDescription);
-  const [progress, setProgress] = useState(currentProgress);
+  const [name, setName] = useState(currentBook?.name ?? '');
+  const [description, setDescription] = useState(
+    currentBook?.description ?? '',
+  );
+  const [progress, setProgress] = useState(currentBook?.progress ?? '');
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     onSubmit({
       description,
       progress,
-      id,
       name,
+      id: currentBook?.id,
     } as IBook);
   }
 

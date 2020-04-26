@@ -2,44 +2,50 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { fetchBookById } from '../state/fetchBookById';
 import { IBook } from '../../List/interfaces/IBook';
-import { EditBookFormContainer } from '../containers/EditBookFormContainer';
+import { BookFormContainer } from '../containers/BookFormContainer';
 
 // this is what we expect coming from '/edit/:id' to 'this.props.match.params.*'
 type PathParamsType = {
   id: string;
 };
+interface IState {
+  book?: IBook;
+  loading: boolean;
+}
 
 export class EditBook extends Component<
   RouteComponentProps<PathParamsType>,
-  IBook
+  IState
 > {
   constructor(props: RouteComponentProps<PathParamsType>) {
     super(props);
 
     this.state = {
-      name: '',
-      id: '',
-      description: '',
-      progress: 0,
+      loading: true,
     };
   }
 
   componentDidMount() {
     const { match } = this.props;
-    fetchBookById(match.params.id).then((book) => this.setState(book));
+    fetchBookById(match.params.id).then((book) =>
+      this.setState({ book, loading: false }),
+    );
   }
 
   render() {
-    const { description, name, progress, id } = this.state;
-    console.log(this.state);
-    // todo if loading.. return 0, else, return edit book with right data
+    const { book, loading } = this.state;
+
+    if (loading) {
+      return 'Loading...';
+    }
+
+    if (book === undefined) {
+      return 'Unable to fetch the book';
+    }
 
     return (
-      <EditBookFormContainer
-        id={id}
-        currentName={name}
-        currentDescription={description}
-        currentProgress={progress}
+      <BookFormContainer
+        currentBook={book}
         submitButtonText="Update Book"
         title="Edit Book"
       />
