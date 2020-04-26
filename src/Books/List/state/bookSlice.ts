@@ -6,11 +6,11 @@ export const bookSlice = createSlice({
   name: 'books',
   initialState: { books: [] as IBook[], loading: true },
   reducers: {
-    addBook(state, action) {
-      state.books.push(action.payload);
+    addBook(draft, action) {
+      draft.books.push(action.payload);
     },
-    updateBook(state, action) {
-      const currentBook = state.books.find(
+    updateBook(draft, action) {
+      const currentBook = draft.books.find(
         (book) => book.id === action.payload.id,
       );
       if (currentBook !== undefined) {
@@ -18,6 +18,7 @@ export const bookSlice = createSlice({
         currentBook.name = action.payload.name;
         currentBook.progress = action.payload.progress;
       }
+      return draft;
     },
   },
   extraReducers: (builder) => {
