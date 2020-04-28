@@ -19,7 +19,7 @@ export function EditPage({ match }: RouteComponentProps<PathParamsType>) {
       setBook(book);
       setLoading(false);
     });
-  }, []);
+  }, [match.params.id]);
 
   if (loading) {
     return <div>Loading...</div>;
