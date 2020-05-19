@@ -46,7 +46,7 @@ export function App() {
         <Route path="/" exact component={BookListContainer} />
         <Route path="/edit/:id" component={EditPage} />
         <Route path="/create" component={CreateBookPage} />
-        <Route path="/login" component={LoginPage} />
+        <LoginPage />
       </div>
     </Router>
   );
