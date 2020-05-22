@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IBook } from '../interfaces/IBook';
+import { IBook } from '../List/interfaces/IBook';
 import { fetchBooks } from './fetchBooks';
 
 export const bookSlice = createSlice({

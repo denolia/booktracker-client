@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { fetchBookById } from '../state/fetchBookById';
+import { fetchBookById } from '../../state/fetchBookById';
 import { IBook } from '../../List/interfaces/IBook';
 import { BookFormContainer } from '../containers/BookFormContainer';
 
