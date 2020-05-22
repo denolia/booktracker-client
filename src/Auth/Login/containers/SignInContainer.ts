@@ -1,21 +1,22 @@
 import { connect } from 'react-redux';
-import { TDispatch } from '../../../Core/State/store';
+import { TDispatch, TRootState } from '../../../Core/State/store';
 import { LoginForm } from '../LoginForm';
 import { LoginMode } from '../enums/LoginMode';
+import { signIn } from '../../state/signIn';
+import { selectLoggedIn } from '../../state/selectLoggedIn';
+
+const mapStateToProps = (state: TRootState) => ({
+  mode: LoginMode.SIGN_IN,
+  loggedIn: selectLoggedIn(state),
+});
 
 const mapDispatchToProps = (dispatch: TDispatch) => ({
   onSubmit: (email: string, password: string) => {
-    console.log('logging in: ', email, password);
-    // signIn(email, password).then(() => {
-    // dispatch(bookSlice.actions.updateBook(book));
-    // if (ownProps?.setEditFinished !== undefined) {
-    //   ownProps.setEditFinished();
-    // }
-    // });
+    dispatch(signIn({ email, password }));
   },
 });
 
 export const SignInContainer = connect(
-  () => ({ mode: LoginMode.SIGN_IN }),
+  mapStateToProps,
   mapDispatchToProps,
 )(LoginForm);

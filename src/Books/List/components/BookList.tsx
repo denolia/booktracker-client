@@ -10,7 +10,7 @@ interface IProps {
 export function BookList({ books, getAllBooks }: IProps) {
   useEffect(() => {
     getAllBooks();
-  });
+  }, []);
 
   return (
     <div>
