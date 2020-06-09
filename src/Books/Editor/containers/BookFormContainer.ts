@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { TDispatch } from '../../../Core/State/store';
 import { BookForm } from '../components/BookForm';
 import { IBook } from '../../List/interfaces/IBook';
-import { updateBook } from '../state/updateBook';
-import { bookSlice } from '../../List/state/bookSlice';
+import { updateBook } from '../../state/updateBook';
+import { bookSlice } from '../../state/bookSlice';
 
 const mapDispatchToProps = (
   dispatch: TDispatch,
