@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
+import { useBooks } from '../../../Core/context/BookContext';
 import { BookTableRow } from './BookTableRow';
 import { Book } from '../interfaces/Book';
 
-interface IProps {
+interface Props {
   books: Book[];
-  getAllBooks: () => void;
 }
 
-export function BookList({ books, getAllBooks }: IProps) {
+export function BookList({ books }: Props) {
+  const { getAllBooks } = useBooks();
   useEffect(() => {
-    getAllBooks();
+    getAllBooks?.();
   }, []);
 
   return (
