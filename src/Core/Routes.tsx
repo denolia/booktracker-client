@@ -7,7 +7,7 @@ import { BookListContainer } from '../Books/List/containers/BookListContainer';
 import Logo from '../assets/logo.png';
 import { LoginPage } from '../Auth/Login/LoginPage';
 
-export function App() {
+export function Routes() {
   return (
     <Router>
       <div className="container">

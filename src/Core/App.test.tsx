@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import { BooksProvider } from './context/BookContext';
+import { Routes } from './Routes';
 import { Provider } from 'react-redux';
 import { store } from './State/store';
 
@@ -8,7 +9,9 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BooksProvider>
+        <Routes />
+      </BooksProvider>
     </Provider>,
     div,
   );
