@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IBook } from '../List/interfaces/IBook';
+import { Book } from '../List/interfaces/Book';
 import { fetchBooks } from './fetchBooks';
 
 export const bookSlice = createSlice({
   name: 'books',
-  initialState: { books: [] as IBook[], loading: true },
+  initialState: { books: [] as Book[], loading: true },
   reducers: {
     addBook(draft, action) {
       draft.books.push(action.payload);

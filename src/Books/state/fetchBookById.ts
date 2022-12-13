@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API } from '../../environment';
-import { IBook } from '../List/interfaces/IBook';
+import { Book } from '../List/interfaces/Book';
 
 export function fetchBookById(bookId: string) {
   return axios.get(`${API}book?id=${bookId}`).then(
@@ -10,6 +10,6 @@ export function fetchBookById(bookId: string) {
         description: response.data.description,
         progress: Number(response.data.progress),
         id: response.data.id,
-      } as IBook),
+      } as Book),
   );
 }

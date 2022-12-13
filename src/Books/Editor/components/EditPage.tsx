@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { fetchBookById } from '../../state/fetchBookById';
-import { IBook } from '../../List/interfaces/IBook';
+import { Book } from '../../List/interfaces/Book';
 import { BookFormContainer } from '../containers/BookFormContainer';
 
 // this is what we expect coming from '/edit/:id' to 'props.match.params.*'
@@ -12,7 +12,7 @@ type PathParamsType = {
 export function EditPage({ match }: RouteComponentProps<PathParamsType>) {
   const [loading, setLoading] = useState(true);
   const [editFinished, setEditFinished] = useState(false);
-  const [book, setBook] = useState<IBook>();
+  const [book, setBook] = useState<Book>();
 
   useEffect(() => {
     fetchBookById(match.params.id).then((book) => {

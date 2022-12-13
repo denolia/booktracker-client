@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Book } from '../../Books/List/interfaces/Book';
 
-type Action = { type: 'increment' } | { type: 'decrement' };
-
-type Dispatch = (action: Action) => void;
-type State = { count: number };
-const BooksContext = React.createContext<
-  { state: State; dispatch: Dispatch } | undefined
->(undefined);
-
-function bookReducer(state: State, action: Action) {
-  switch (action.type) {
-    case 'increment': {
-      return { count: state.count + 1 };
-    }
-    case 'decrement': {
-      return { count: state.count - 1 };
-    }
-    default: {
-      throw new Error(`Unhandled action: ${action}`);
-    }
-  }
+interface BooksContext {
+  books: Book[];
+  loading: boolean;
 }
 
-export function BooksProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = React.useReducer(bookReducer, { count: 0 });
-  const value = { state, dispatch };
+const Context = React.createContext<BooksContext | undefined>(undefined);
 
-  return (
-    <BooksContext.Provider value={value}>{children}</BooksContext.Provider>
-  );
+export function BooksProvider({ children }: { children: React.ReactNode }) {
+  const [state, setState] = useState<BooksContext>({
+    books: [],
+    loading: true,
+  });
+
+  const addBook = (newBook: Book) => {
+    setState(({ books, ...rest }) => ({
+      books: [...books, newBook],
+      ...rest,
+    }));
+  };
+
+  const value = { ...state, addBook };
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 
 export function useBooks() {
-  const context = React.useContext(BooksContext);
+  const context = React.useContext(Context);
   if (!context) {
     throw new Error('useBooks must be used within a BooksProvider');
   }

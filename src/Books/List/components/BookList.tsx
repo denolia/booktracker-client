@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { BookTableRow } from './BookTableRow';
-import { IBook } from '../interfaces/IBook';
+import { Book } from '../interfaces/Book';
 
 interface IProps {
-  books: IBook[];
+  books: Book[];
   getAllBooks: () => void;
 }
 
@@ -25,7 +25,7 @@ export function BookList({ books, getAllBooks }: IProps) {
           </tr>
         </thead>
         <tbody>
-          {books.map((book: IBook) => (
+          {books.map((book: Book) => (
             <BookTableRow book={book} key={book.id as string} />
           ))}
         </tbody>

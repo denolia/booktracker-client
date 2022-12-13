@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { TDispatch } from '../../../Core/State/store';
 import { BookForm } from '../components/BookForm';
-import { IBook } from '../../List/interfaces/IBook';
+import { Book } from '../../List/interfaces/Book';
 import { updateBook } from '../../state/updateBook';
 import { bookSlice } from '../../state/bookSlice';
 
@@ -9,7 +9,7 @@ const mapDispatchToProps = (
   dispatch: TDispatch,
   ownProps: { setEditFinished?: () => void },
 ) => ({
-  onSubmit: (book: IBook) => {
+  onSubmit: (book: Book) => {
     updateBook(book).then(() => {
       dispatch(bookSlice.actions.updateBook(book));
       if (ownProps?.setEditFinished !== undefined) {

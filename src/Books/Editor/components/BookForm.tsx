@@ -1,11 +1,11 @@
 import React, { FormEvent, useState } from 'react';
-import { IBook } from '../../List/interfaces/IBook';
+import { Book } from '../../List/interfaces/Book';
 
 interface IProps {
-  onSubmit: (book: IBook) => void;
+  onSubmit: (book: Book) => void;
   submitButtonText: string;
   title: string;
-  currentBook?: IBook;
+  currentBook?: Book;
 }
 
 export function BookForm({
@@ -27,7 +27,7 @@ export function BookForm({
       progress,
       name,
       id: currentBook?.id,
-    } as IBook);
+    } as Book);
   }
 
   return (
