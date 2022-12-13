@@ -20,5 +20,5 @@
     "noEmit": true,
     "typeRoots": ["./src/types"]
   },
-  "include": ["./src/"]
+  "include": ["./src/", "node_modules/@types/jest/index.d.ts"]
 }
