@@ -3,12 +3,8 @@ import { useBooks } from '../../../Core/context/BookContext';
 import { BookTableRow } from './BookTableRow';
 import { Book } from '../interfaces/Book';
 
-interface Props {
-  books: Book[];
-}
-
-export function BookList({ books }: Props) {
-  const { getAllBooks } = useBooks();
+export function BookList() {
+  const { books, getAllBooks } = useBooks();
   useEffect(() => {
     getAllBooks?.();
   }, []);
@@ -19,7 +15,8 @@ export function BookList({ books }: Props) {
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Author</th>
             <th>Description</th>
             <th>Progress</th>
             <th> </th>

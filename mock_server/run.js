@@ -6,18 +6,24 @@ app.get('/books', (req, res) => {
   const books = [
     {
       id: 1,
-      title: 'The Great Gatsby',
+      name: 'The Great Gatsby',
       author: 'F. Scott Fitzgerald',
+      description: 'asdf',
+      progress: '20',
     },
     {
       id: 2,
-      title: 'To Kill a Mockingbird',
+      name: 'To Kill a Mockingbird',
       author: 'Harper Lee',
+      description: 'asdf',
+      progress: '30',
     },
     {
       id: 3,
-      title: 'One Hundred Years of Solitude',
+      name: 'One Hundred Years of Solitude',
       author: 'Gabriel García Márquez',
+      description: 'asdf',
+      progress: '90',
     },
   ];
 

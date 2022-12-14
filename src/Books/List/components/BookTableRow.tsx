@@ -10,6 +10,7 @@ interface IProps {
 export const BookTableRow = ({ book }: IProps) => (
   <tr>
     <td>{book.name}</td>
+    <td>{book.author}</td>
     <td>{book.description}</td>
     <td>{book.progress}</td>
     <td>
