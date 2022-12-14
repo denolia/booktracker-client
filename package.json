@@ -31,6 +31,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "express": "^4.18.2",
     "husky": "^4.3.8",
     "prettier": "2.0.4",
     "pretty-quick": "^2.0.1",
@@ -44,7 +45,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/",
+    "run_mock": "node ./mock_server/run.js"
   },
   "husky": {
     "hooks": {
