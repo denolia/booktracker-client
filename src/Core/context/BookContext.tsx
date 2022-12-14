@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { updateBook } from '../../Books/state/updateBook';
+import React, { useEffect, useState } from 'react';
+import { requestUpdateBook } from '../../Books/state/requestUpdateBook';
 import { Book } from '../../Books/types';
 import { requestGetAllBooks } from '../../Books/state/fetchBooks';
 
@@ -7,7 +7,7 @@ interface BooksContext {
   books: Book[];
   loading: boolean;
   getAllBooks: () => void;
-  addBook: (b: Book) => Promise<boolean>;
+  updateBook: (b: Book) => Promise<boolean>;
 }
 
 const Context = React.createContext<BooksContext | undefined>(undefined);
@@ -17,22 +17,8 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
     books: [],
     loading: true,
     getAllBooks: () => {},
-    addBook: async () => true,
+    updateBook: async () => true,
   });
-
-  const addBook = async (newBook: Book) => {
-    const res = await updateBook(newBook);
-
-    if (!res) {
-      // todo add toast notification
-      return false;
-    }
-    setState(({ books, ...rest }) => ({
-      books: [...books, newBook],
-      ...rest,
-    }));
-    return true;
-  };
 
   const getAllBooks = async () => {
     const books = await requestGetAllBooks();
@@ -40,11 +26,34 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
       setState(({ books: _, ...rest }) => ({
         books,
         ...rest,
+        loading: false,
       }));
     }
   };
 
-  const value = { ...state, addBook, getAllBooks };
+  useEffect(() => {
+    getAllBooks();
+  }, []);
+
+  const updateBook = async (newBook: Book) => {
+    const res = await requestUpdateBook(newBook);
+
+    if (!res) {
+      // todo add toast notification
+      return false;
+    }
+
+    setState(({ books, ...rest }) => {
+      const otherBooks = books.filter((book) => book.id !== newBook.id);
+      return {
+        books: [...otherBooks, newBook],
+        ...rest,
+      };
+    });
+    return true;
+  };
+
+  const value = { ...state, updateBook, getAllBooks };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }

@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useBooks } from '../../../Core/context/BookContext';
 import { BookTableRow } from './BookTableRow';
 import { Book } from '../../types';
 
 export function BookList() {
-  const { books, getAllBooks } = useBooks();
-  useEffect(() => {
-    getAllBooks?.();
-  }, []);
+  const { books } = useBooks();
 
   return (
     <div>

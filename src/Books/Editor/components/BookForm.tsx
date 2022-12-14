@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function BookForm({ submitButtonText, currentBook, title }: Props) {
-  const { addBook } = useBooks();
+  const { updateBook } = useBooks();
   const [name, setName] = useState(currentBook?.name ?? '');
   const [description, setDescription] = useState(
     currentBook?.description ?? '',
@@ -21,7 +21,7 @@ export function BookForm({ submitButtonText, currentBook, title }: Props) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await addBook({
+    const res = await updateBook({
       description,
       progress,
       name,
