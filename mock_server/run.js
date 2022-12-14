@@ -4,7 +4,10 @@ const app = express();
 const port = 3003;
 
 app.options('*', cors());
+
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 const books = [
   {
@@ -36,12 +39,12 @@ app.get('/books', (req, res) => {
 
 app.get('/book', function (req, res) {
   const id = req.query.id;
-  console.log('params: ', req.query);
   res.send(books.find((book) => book.id === id));
 });
 
 app.post('/update_book', (req, res) => {
-  res.send(books);
+  console.log(req.body);
+  res.json(req.body);
 });
 
 app.get('/', (req, res) => {
