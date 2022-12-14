@@ -44,9 +44,20 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
     }
 
     setState(({ books, ...rest }) => {
-      const otherBooks = books.filter((book) => book.id !== newBook.id);
+      const existingBookIndex = books.findIndex(
+        (book) => book.id === newBook.id,
+      );
+      if (existingBookIndex >= 0) {
+        const updatedBooks = [...books];
+        updatedBooks[existingBookIndex] = newBook;
+        return {
+          books: updatedBooks,
+          ...rest,
+        };
+      }
+
       return {
-        books: [...otherBooks, newBook],
+        books: [...books, newBook],
         ...rest,
       };
     });
