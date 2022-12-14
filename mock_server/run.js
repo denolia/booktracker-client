@@ -1,6 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3003;
+
+app.options('*', cors());
+app.use(cors());
 
 const books = [
   {
@@ -36,10 +40,14 @@ app.get('/book', function (req, res) {
   res.send(books.find((book) => book.id === id));
 });
 
+app.post('/update_book', (req, res) => {
+  res.send(books);
+});
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
 app.listen(port, () => {
-  console.log(`Mock booktracker backend app listening on port ${port}`);
+  console.log(`Mocked booktracker backend app listening on port ${port}`);
 });
