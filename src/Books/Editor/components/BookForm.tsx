@@ -1,33 +1,41 @@
 import React, { FormEvent, useState } from 'react';
+import { Redirect } from 'react-router';
+import { useBooks } from '../../../Core/context/BookContext';
 import { Book } from '../../types';
 
-interface IProps {
-  onSubmit: (book: Book) => void;
+interface Props {
   submitButtonText: string;
   title: string;
   currentBook?: Book;
 }
 
-export function BookForm({
-  onSubmit,
-  submitButtonText,
-  currentBook,
-  title,
-}: IProps) {
+export function BookForm({ submitButtonText, currentBook, title }: Props) {
+  const { addBook } = useBooks();
   const [name, setName] = useState(currentBook?.name ?? '');
   const [description, setDescription] = useState(
     currentBook?.description ?? '',
   );
+  const [author, setAuthor] = useState(currentBook?.author ?? '');
   const [progress, setProgress] = useState(currentBook?.progress ?? '');
+  const [editFinished, setEditFinished] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit({
+    const res = await addBook({
       description,
       progress,
       name,
       id: currentBook?.id,
     } as Book);
+
+    if (res) {
+      setEditFinished(true);
+    }
+    // todo handle error case
+  }
+
+  if (editFinished) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -36,7 +44,7 @@ export function BookForm({
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name" style={{ width: '100%' }}>
-            Name:
+            Title:
             <input
               type="text"
               className="form-control"
@@ -47,6 +55,20 @@ export function BookForm({
             />
           </label>
         </div>
+        <div className="form-group">
+          <label htmlFor="author" style={{ width: '100%' }}>
+            Author:
+            <input
+              type="text"
+              className="form-control"
+              value={author}
+              name="author"
+              id="author"
+              onChange={(e) => setAuthor(e.target.value)}
+            />
+          </label>
+        </div>
+
         <div className="form-group">
           <label htmlFor="description" style={{ width: '100%' }}>
             Description:

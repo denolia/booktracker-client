@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateBook } from '../../Books/state/updateBook';
 import { Book } from '../../Books/types';
 import { requestGetAllBooks } from '../../Books/state/fetchBooks';
 
@@ -6,6 +7,7 @@ interface BooksContext {
   books: Book[];
   loading: boolean;
   getAllBooks: () => void;
+  addBook: (b: Book) => Promise<boolean>;
 }
 
 const Context = React.createContext<BooksContext | undefined>(undefined);
@@ -15,13 +17,21 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
     books: [],
     loading: true,
     getAllBooks: () => {},
+    addBook: async () => true,
   });
 
-  const addBook = (newBook: Book) => {
+  const addBook = async (newBook: Book) => {
+    const res = await updateBook(newBook);
+
+    if (!res) {
+      // todo add toast notification
+      return false;
+    }
     setState(({ books, ...rest }) => ({
       books: [...books, newBook],
       ...rest,
     }));
+    return true;
   };
 
   const getAllBooks = async () => {
