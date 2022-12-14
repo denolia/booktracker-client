@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Book } from '../../Books/List/interfaces/Book';
+import { Book } from '../../Books/types';
 import { requestGetAllBooks } from '../../Books/state/fetchBooks';
 
 interface BooksContext {

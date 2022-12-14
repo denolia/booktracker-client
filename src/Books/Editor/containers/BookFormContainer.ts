@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { TDispatch } from '../../../Core/State/store';
 import { BookForm } from '../components/BookForm';
-import { Book } from '../../List/interfaces/Book';
+import { Book } from '../../types';
 import { updateBook } from '../../state/updateBook';
 import { bookSlice } from '../../state/bookSlice';
 

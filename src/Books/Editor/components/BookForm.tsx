@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Book } from '../../List/interfaces/Book';
+import { Book } from '../../types';
 
 interface IProps {
   onSubmit: (book: Book) => void;

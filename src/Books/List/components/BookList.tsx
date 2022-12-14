@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useBooks } from '../../../Core/context/BookContext';
 import { BookTableRow } from './BookTableRow';
-import { Book } from '../interfaces/Book';
+import { Book } from '../../types';
 
 export function BookList() {
   const { books, getAllBooks } = useBooks();

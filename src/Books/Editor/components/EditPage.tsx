@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { fetchBookById } from '../../state/fetchBookById';
-import { Book } from '../../List/interfaces/Book';
+import { Book } from '../../types';
 import { BookFormContainer } from '../containers/BookFormContainer';
 
 // this is what we expect coming from '/edit/:id' to 'props.match.params.*'

@@ -1,11 +1,11 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { CreateBookPage } from '../Books/Editor/components/CreateBookPage';
-import { EditPage } from '../Books/Editor/components/EditPage';
-import { BookListContainer } from '../Books/List/containers/BookListContainer';
 import Logo from '../assets/logo.png';
 import { LoginPage } from '../Auth/Login/LoginPage';
+import { CreateBookPage } from '../Books/Editor/components/CreateBookPage';
+import { EditPage } from '../Books/Editor/components/EditPage';
+import { BookList } from '../Books/List/components/BookList';
 
 export function Routes() {
   return (
@@ -43,7 +43,7 @@ export function Routes() {
         </nav>
         <br />
 
-        <Route path="/" exact component={BookListContainer} />
+        <Route path="/" exact component={BookList} />
         <Route path="/edit/:id" component={EditPage} />
         <Route path="/create" component={CreateBookPage} />
         <LoginPage />

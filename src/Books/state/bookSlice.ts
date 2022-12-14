@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Book } from '../List/interfaces/Book';
-import { fetchBooks } from './fetchBooks';
+import { Book } from '../types';
 
 export const bookSlice = createSlice({
   name: 'books',
@@ -20,14 +19,5 @@ export const bookSlice = createSlice({
       }
       return draft;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchBooks.fulfilled, (draft, { payload }) => {
-      draft.books = payload;
-      draft.loading = false;
-    });
-    builder.addCase(fetchBooks.rejected, (draft) => {
-      draft.loading = false;
-    });
   },
 });
