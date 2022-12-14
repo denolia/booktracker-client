@@ -6,10 +6,8 @@ export function fetchBookById(bookId: string) {
   return axios.get(`${API}book?id=${bookId}`).then(
     (response) =>
       ({
-        name: response.data.name,
-        description: response.data.description,
+        ...response.data,
         progress: Number(response.data.progress),
-        id: response.data.id,
       } as Book),
   );
 }

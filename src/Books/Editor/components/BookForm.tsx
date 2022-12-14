@@ -23,6 +23,7 @@ export function BookForm({ submitButtonText, currentBook, title }: Props) {
     e.preventDefault();
     const res = await updateBook({
       description,
+      author,
       progress,
       name,
       id: currentBook?.id,
