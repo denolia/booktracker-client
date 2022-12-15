@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function LoginForm({ mode }: Props) {
-  const { isLoggedIn, login } = useAuth();
+  const { isLoggedIn, login, signup } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,8 @@ export function LoginForm({ mode }: Props) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    login(email, password);
+    const loginMethod = mode === LoginMode.SIGN_IN ? login : signup;
+    loginMethod(email, password);
   }
 
   return (

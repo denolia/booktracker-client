@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { requestLogin } from './state/requestLogin';
+import { requestSignup } from './state/requestSignup';
 import { User } from './types';
 
 interface AuthContext {
   user: User | null;
   isLoggedIn: boolean;
   login: (email: string, password: string) => Promise<void>;
+  signup: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -23,9 +25,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(loggedInUser);
   };
 
+  const signup = async (email: string, password: string) => {
+    const signedUpUser = await requestSignup(email, password);
+    setUser(signedUpUser);
+  };
+
   const isLoggedIn = Boolean(user?.jwt);
 
-  const value: AuthContext = { user, login, logout, isLoggedIn };
+  const value: AuthContext = { user, login, signup, logout, isLoggedIn };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
