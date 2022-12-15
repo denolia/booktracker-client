@@ -1,21 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { Provider } from 'react-redux';
 import { AuthProvider } from './Auth/AuthContext';
-import { Routes } from './Core/Routes';
-import { store } from './Core/State/store';
 import { BooksProvider } from './Books/state/BookContext';
+import { Routes } from './Core/Routes';
+import './index.css';
 
 function App() {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <BooksProvider>
-          <Routes />
-        </BooksProvider>
-      </AuthProvider>
-    </Provider>
+    <AuthProvider>
+      <BooksProvider>
+        <Routes />
+      </BooksProvider>
+    </AuthProvider>
   );
 }
 
