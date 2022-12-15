@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { requestUpdateBook } from '../../Books/state/requestUpdateBook';
-import { Book } from '../../Books/types';
-import { requestGetAllBooks } from '../../Books/state/fetchBooks';
+import { useAuth } from '../../Auth/AuthContext';
+import { requestUpdateBook } from './requestUpdateBook';
+import { Book } from '../types';
+import { requestGetAllBooks } from './fetchBooks';
 
 interface BooksContext {
   books: Book[];
   loading: boolean;
-  getAllBooks: () => void;
+  getAllBooks: (token: string | undefined) => void;
   updateBook: (b: Book) => Promise<boolean>;
 }
 
@@ -20,8 +21,8 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
     updateBook: async () => true,
   });
 
-  const getAllBooks = async () => {
-    const books = await requestGetAllBooks();
+  const getAllBooks = async (token: string | undefined) => {
+    const books = await requestGetAllBooks(token);
     if (books) {
       setState(({ books: _, ...rest }) => ({
         books,
@@ -30,10 +31,6 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
       }));
     }
   };
-
-  useEffect(() => {
-    getAllBooks();
-  }, []);
 
   const updateBook = async (newBook: Book) => {
     const res = await requestUpdateBook(newBook);
@@ -70,9 +67,16 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useBooks() {
+  const { user } = useAuth();
   const context = React.useContext(Context);
   if (!context) {
     throw new Error('useBooks must be used within a BooksProvider');
   }
+  useEffect(() => {
+    if (user?.jwt) {
+      context.getAllBooks(user?.jwt);
+    }
+  }, [user?.jwt]);
+
   return context;
 }

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { AuthProvider } from './Auth/AuthContext';
 import { Routes } from './Core/Routes';
 import { store } from './Core/State/store';
-import { BooksProvider } from './Core/context/BookContext';
+import { BooksProvider } from './Books/state/BookContext';
 
 function App() {
   return (

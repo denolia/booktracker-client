@@ -3,7 +3,7 @@ import { requestLogin } from './state/requestLogin';
 import { User } from './types';
 
 interface AuthContext {
-  user?: User;
+  user: User | null;
   isLoggedIn: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -12,15 +12,10 @@ interface AuthContext {
 const Context = React.createContext<AuthContext | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [state, _setState] = useState<AuthContext>({
-    isLoggedIn: false,
-    login: async () => {},
-    logout: () => true,
-  });
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>(null);
 
   const logout = () => {
-    setUser(undefined);
+    setUser(null);
   };
 
   const login = async (email: string, password: string) => {
@@ -28,9 +23,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(loggedInUser);
   };
 
-  const isLoggedIn = Boolean(user?.email);
+  const isLoggedIn = Boolean(user?.jwt);
 
-  const value = { ...state, user, login, logout, isLoggedIn };
+  const value: AuthContext = { user, login, logout, isLoggedIn };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }

@@ -5,7 +5,7 @@ function dummyLogin(): Promise<User> {
     setTimeout(
       () =>
         resolve({
-          email: 'my@email.com',
+          username: 'my@email.com',
           firstName: 'Julia',
           lastName: 'Bubnova',
         } as User),

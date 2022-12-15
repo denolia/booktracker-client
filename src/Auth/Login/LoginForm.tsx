@@ -24,11 +24,7 @@ export function LoginForm({ mode }: Props) {
   }
 
   return (
-    <div
-      className={
-        'container-sm justify-content-center col-lg-4 col-md-8 col-sm-12'
-      }
-    >
+    <div className="container-sm justify-content-center col-lg-4 col-md-8 col-sm-12">
       <h4>
         {mode} or{' '}
         <Link
