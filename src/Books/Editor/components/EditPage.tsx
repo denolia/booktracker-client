@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
+import { useAuth } from '../../../Auth/AuthContext';
 import { fetchBookById } from '../../state/fetchBookById';
 import { Book } from '../../types';
 import { BookForm } from './BookForm';
@@ -12,9 +13,10 @@ type PathParamsType = {
 export function EditPage({ match }: RouteComponentProps<PathParamsType>) {
   const [loading, setLoading] = useState(true);
   const [book, setBook] = useState<Book>();
+  const { user } = useAuth();
 
   useEffect(() => {
-    fetchBookById(match.params.id).then((bookFetched) => {
+    fetchBookById(match.params.id, user?.jwt).then((bookFetched) => {
       setBook(bookFetched);
       setLoading(false);
     });

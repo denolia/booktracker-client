@@ -6,3 +6,7 @@
 switch to a simple webpack script instead
 
 * remove bootstrap :|
+
+* wrap all must-be-logged-in pages into redirect (after lib update)
+
+* persist token somewhere

@@ -7,7 +7,7 @@ import { requestGetAllBooks } from './fetchBooks';
 interface BooksContext {
   books: Book[];
   loading: boolean;
-  getAllBooks: (token: string | undefined) => void;
+  getAllBooks: () => void;
   updateBook: (b: Book) => Promise<boolean>;
 }
 
@@ -20,9 +20,10 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
     getAllBooks: () => {},
     updateBook: async () => true,
   });
+  const { user } = useAuth();
 
-  const getAllBooks = async (token: string | undefined) => {
-    const books = await requestGetAllBooks(token);
+  const getAllBooks = async () => {
+    const books = await requestGetAllBooks(user?.jwt);
     if (books) {
       setState(({ books: _, ...rest }) => ({
         books,
@@ -33,7 +34,7 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateBook = async (newBook: Book) => {
-    const res = await requestUpdateBook(newBook);
+    const res = await requestUpdateBook(newBook, user?.jwt);
 
     if (!res) {
       // todo add toast notification
@@ -67,16 +68,16 @@ export function BooksProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useBooks() {
-  const { user } = useAuth();
+  const { isLoggedIn } = useAuth();
   const context = React.useContext(Context);
   if (!context) {
     throw new Error('useBooks must be used within a BooksProvider');
   }
   useEffect(() => {
-    if (user?.jwt) {
-      context.getAllBooks(user?.jwt);
+    if (isLoggedIn) {
+      context.getAllBooks();
     }
-  }, [user?.jwt]);
+  }, [isLoggedIn]);
 
   return context;
 }
