@@ -1,25 +1,26 @@
-import { Link } from 'react-router-dom';
-import { LoginMode } from './enums/LoginMode';
 import React, { FormEvent, useState } from 'react';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import { LoginMode } from './types';
 
-interface IProps {
+interface Props {
   mode: LoginMode;
-  loggedIn: boolean;
-  onSubmit: (email: string, password: string) => void;
 }
 
-export function LoginForm({ mode, onSubmit, loggedIn }: IProps) {
+export function LoginForm({ mode }: Props) {
+  const { isLoggedIn, login } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  if (loggedIn) {
+  if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit(email, password);
+    login(email, password);
   }
 
   return (
