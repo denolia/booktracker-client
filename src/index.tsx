@@ -1,4 +1,3 @@
-import { ENVIRONMENT } from '@app/environment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AuthProvider } from './Auth/AuthContext';
@@ -11,7 +10,6 @@ const rootElement = document.createElement('div');
 document.body.appendChild(rootElement);
 
 function App() {
-  console.log(ENVIRONMENT);
   return (
     <AuthProvider>
       <BooksProvider>
