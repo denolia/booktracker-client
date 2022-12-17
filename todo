@@ -1,5 +1,5 @@
-* remove redux
-
++++ remove redux
+--- we are here ---
 * update libs
 
 * I'd like to get rid of create react app
@@ -9,4 +9,4 @@ switch to a simple webpack script instead
 
 * wrap all must-be-logged-in pages into redirect (after lib update)
 
-* persist token somewhere
+* persist token somewhere (cookies)

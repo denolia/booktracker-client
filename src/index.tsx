@@ -5,6 +5,10 @@ import { BooksProvider } from './Books/state/BookContext';
 import { Routes } from './Core/Routes';
 import './index.css';
 
+const rootElement = document.createElement('div');
+
+document.body.appendChild(rootElement);
+
 function App() {
   return (
     <AuthProvider>
@@ -15,4 +19,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, rootElement);
