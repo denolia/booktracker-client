@@ -103,7 +103,7 @@ module.exports = (_, argv) => {
 function checkEnvironmentVariables() {
   dotenv.config();
 
-  const { ENVIRONMENT } = process.env;
+  const ENVIRONMENT = process.env.ENVIRONMENT;
 
   const missingOtherEnvVariables = Object.entries({
     ENVIRONMENT,
