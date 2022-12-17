@@ -2,12 +2,13 @@ import React from 'react';
 import { useBooks } from '../../state/BookContext';
 import { BookTableRow } from './BookTableRow';
 import { Book } from '../../types';
+import css from './BookList.module.css';
 
 export function BookList() {
   const { books } = useBooks();
 
   return (
-    <div>
+    <div className={css.container}>
       <h3>Books List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>

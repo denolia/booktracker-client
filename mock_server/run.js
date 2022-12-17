@@ -51,6 +51,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  res.json({ username: 'test', jwt: 'testToken123' });
+});
+
 app.listen(port, () => {
   console.log(`Mocked booktracker backend app listening on port ${port}`);
 });

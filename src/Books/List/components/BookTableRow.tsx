@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import { Book } from '../../types';
 
-interface IProps {
+interface Props {
   book: Book;
   key: string;
 }
 
-export const BookTableRow = ({ book }: IProps) => (
+export const BookTableRow = ({ book }: Props) => (
   <tr>
     <td>{book.name}</td>
     <td>{book.author}</td>

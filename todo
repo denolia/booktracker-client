@@ -1,12 +1,12 @@
-* remove redux
++++ remove redux
++++ I'd like to get rid of create react app
++++ switch to a simple webpack script instead
++++ Add a simple express server
++++ Add CSS modules config
+
+--- we are here ---
 
 * update libs
-
-* I'd like to get rid of create react app
-switch to a simple webpack script instead
-
 * remove bootstrap :|
-
 * wrap all must-be-logged-in pages into redirect (after lib update)
-
-* persist token somewhere
+* persist token somewhere (cookies)
