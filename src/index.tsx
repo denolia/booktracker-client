@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AuthProvider } from './Auth/AuthContext';
 import { BooksProvider } from './Books/state/BookContext';
-import { Routes } from './Core/Routes';
+import { AppRoutes } from './Core/AppRoutes';
 import './index.css';
 
 const rootElement = document.createElement('div');
@@ -13,7 +13,7 @@ function App() {
   return (
     <AuthProvider>
       <BooksProvider>
-        <Routes />
+        <AppRoutes />
       </BooksProvider>
     </AuthProvider>
   );

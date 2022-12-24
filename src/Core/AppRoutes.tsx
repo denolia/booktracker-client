@@ -1,15 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+
+import { SignInContainer } from '@app/Auth/Login/containers/SignInContainer';
+import { SignUpContainer } from '@app/Auth/Login/containers/SignUpContainer';
 import Logo from '../assets/logo.png';
-import { LoginPage } from '../Auth/Login/LoginPage';
 import { CreateBookPage } from '../Books/Editor/components/CreateBookPage';
 import { EditPage } from '../Books/Editor/components/EditPage';
 import { BookList } from '../Books/List/components/BookList';
 
-export function Routes() {
+export function AppRoutes() {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" target="_blank" href="/">
@@ -42,12 +44,14 @@ export function Routes() {
           </div>
         </nav>
         <br />
-
-        <Route path="/" exact component={BookList} />
-        <Route path="/edit/:id" component={EditPage} />
-        <Route path="/create" component={CreateBookPage} />
-        <LoginPage />
+        <Routes>
+          <Route path="/" element={<BookList />} />
+          <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/create" element={<CreateBookPage />} />
+          <Route path="/login" element={<SignInContainer />} />
+          <Route path="/register" element={<SignUpContainer />} />
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }

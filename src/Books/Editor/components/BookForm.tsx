@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from 'react';
-import { Redirect } from 'react-router';
+import { useNavigate } from 'react-router';
+
 import { useBooks } from '../../state/BookContext';
 import { Book } from '../../types';
 
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export function BookForm({ submitButtonText, currentBook, title }: Props) {
+  const navigate = useNavigate();
+
   const { updateBook } = useBooks();
   const [name, setName] = useState(currentBook?.name ?? '');
   const [description, setDescription] = useState(
@@ -17,7 +20,6 @@ export function BookForm({ submitButtonText, currentBook, title }: Props) {
   );
   const [author, setAuthor] = useState(currentBook?.author ?? '');
   const [progress, setProgress] = useState(currentBook?.progress ?? '');
-  const [editFinished, setEditFinished] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,13 +32,9 @@ export function BookForm({ submitButtonText, currentBook, title }: Props) {
     } as Book);
 
     if (res) {
-      setEditFinished(true);
+      navigate('/');
     }
     // todo handle error case
-  }
-
-  if (editFinished) {
-    return <Redirect to="/" />;
   }
 
   return (

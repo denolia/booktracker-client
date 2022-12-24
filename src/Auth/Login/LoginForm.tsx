@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Redirect } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { LoginMode } from './types';
@@ -9,13 +9,15 @@ interface Props {
 }
 
 export function LoginForm({ mode }: Props) {
+  const navigate = useNavigate();
+
   const { isLoggedIn, login, signup } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   if (isLoggedIn) {
-    return <Redirect to="/" />;
+    navigate('/');
   }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
