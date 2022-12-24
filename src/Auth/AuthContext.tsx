@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import { requestLogin } from './state/requestLogin';
 import { requestSignup } from './state/requestSignup';
 import { User } from './types';
@@ -15,6 +17,7 @@ const Context = React.createContext<AuthContext | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   const logout = () => {
     setUser(null);
@@ -23,11 +26,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string) => {
     const loggedInUser = await requestLogin(email, password);
     setUser(loggedInUser);
+    navigate('/');
   };
 
   const signup = async (email: string, password: string) => {
     const signedUpUser = await requestSignup(email, password);
     setUser(signedUpUser);
+    navigate('/');
   };
 
   const isLoggedIn = Boolean(user?.jwt);

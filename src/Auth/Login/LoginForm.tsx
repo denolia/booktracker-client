@@ -9,16 +9,10 @@ interface Props {
 }
 
 export function LoginForm({ mode }: Props) {
-  const navigate = useNavigate();
-
-  const { isLoggedIn, login, signup } = useAuth();
+  const { login, signup } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  if (isLoggedIn) {
-    navigate('/');
-  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
