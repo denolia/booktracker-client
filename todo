@@ -7,7 +7,7 @@
 
 --- we are here ---
 
-* remove bootstrap :|
+* remove bootstrap :| try material-ui instead
 * wrap all must-be-logged-in pages into redirect (after lib update)
 * persist token somewhere (cookies)
 
