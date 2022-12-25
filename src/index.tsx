@@ -1,8 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
 import { AuthProvider } from './Auth/AuthContext';
 import { BooksProvider } from './Books/state/BookContext';
-import { Routes } from './Core/Routes';
+import { AppRoutes } from './Core/AppRoutes';
 import './index.css';
 
 const rootElement = document.createElement('div');
@@ -11,12 +13,14 @@ document.body.appendChild(rootElement);
 
 function App() {
   return (
-    <AuthProvider>
-      <BooksProvider>
-        <Routes />
-      </BooksProvider>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <BooksProvider>
+          <AppRoutes />
+        </BooksProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
-
-ReactDOM.render(<App />, rootElement);
+const root = createRoot(rootElement);
+root.render(<App />);

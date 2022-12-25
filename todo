@@ -3,10 +3,14 @@
 +++ switch to a simple webpack script instead
 +++ Add a simple express server
 +++ Add CSS modules config
++++ update libs
 
 --- we are here ---
 
-* update libs
 * remove bootstrap :|
 * wrap all must-be-logged-in pages into redirect (after lib update)
 * persist token somewhere (cookies)
+
+configure nginx
+add test step to CI
+add deploy step to CI

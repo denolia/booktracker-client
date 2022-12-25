@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AuthProvider } from '../Auth/AuthContext';
 import { BooksProvider } from '../Books/state/BookContext';
-import { Routes } from './Routes';
+import { AppRoutes } from './AppRoutes';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <AuthProvider>
       <BooksProvider>
-        <Routes />
+        <AppRoutes />
       </BooksProvider>
     </AuthProvider>,
     div,
