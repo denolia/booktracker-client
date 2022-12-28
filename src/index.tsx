@@ -1,3 +1,4 @@
+import { BookThemeProvider } from '@app/Theme/ThemeProvider';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,11 +15,13 @@ document.body.appendChild(rootElement);
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <BooksProvider>
-          <AppRoutes />
-        </BooksProvider>
-      </AuthProvider>
+      <BookThemeProvider>
+        <AuthProvider>
+          <BooksProvider>
+            <AppRoutes />
+          </BooksProvider>
+        </AuthProvider>
+      </BookThemeProvider>
     </BrowserRouter>
   );
 }
