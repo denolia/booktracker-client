@@ -38,7 +38,6 @@ export function LoginForm({ mode }: Props) {
   return (
     <div className="container-sm justify-content-center col-lg-4 col-md-8 col-sm-12">
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,

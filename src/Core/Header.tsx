@@ -5,8 +5,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { Link as LinkRouter } from 'react-router-dom';
+import { useTheme } from '@mui/material';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -16,14 +16,13 @@ interface HeaderProps {
   title: string;
 }
 
-// clicking on this material-ui link reloads the page
-// TODO fix this
-
 export function Header({ sections, title }: HeaderProps) {
+  const theme = useTheme();
+
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <LinkRouter color="inherit" key="home" to="/">
+        <LinkRouter color="inherit" to="/">
           <img src={Logo} width="30" height="30" alt="Logo" />
         </LinkRouter>
 
@@ -41,7 +40,15 @@ export function Header({ sections, title }: HeaderProps) {
           <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="small">
-          <LinkRouter to="/login">Login</LinkRouter>
+          <LinkRouter
+            to="/login"
+            style={{
+              color: theme.palette.primary.dark,
+              textDecoration: 'none',
+            }}
+          >
+            Login
+          </LinkRouter>
         </Button>
       </Toolbar>
       <Toolbar
@@ -50,16 +57,16 @@ export function Header({ sections, title }: HeaderProps) {
         sx={{ justifyContent: 'flex-start', overflowX: 'auto' }}
       >
         {sections.map(({ title: sectionTitle, url }) => (
-          <Link
-            color="inherit"
-            noWrap
+          <LinkRouter
             key={sectionTitle}
-            variant="body2"
-            href={url}
-            sx={{ p: 1, flexShrink: 0 }}
+            to={url}
+            style={{
+              color: theme.palette.primary.dark,
+              marginRight: theme.spacing(2),
+            }}
           >
             {sectionTitle}
-          </Link>
+          </LinkRouter>
         ))}
       </Toolbar>
     </>
