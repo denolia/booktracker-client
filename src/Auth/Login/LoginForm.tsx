@@ -89,7 +89,7 @@ export function LoginForm({ mode }: Props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {mode}
             </Button>
             <Grid container>
               <Grid item xs>
