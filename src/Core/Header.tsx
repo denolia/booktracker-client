@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { Link as LinkRouter } from 'react-router-dom';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -47,7 +48,7 @@ export function Header({ sections, title }: HeaderProps) {
           <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="small">
-          Login
+          <LinkRouter to="/login">Login</LinkRouter>
         </Button>
       </Toolbar>
       <Toolbar

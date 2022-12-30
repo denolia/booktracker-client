@@ -5,7 +5,7 @@ import { SignInContainer } from '@app/Auth/Login/containers/SignInContainer';
 import { SignUpContainer } from '@app/Auth/Login/containers/SignUpContainer';
 import { CreateBookPage } from '../Books/Editor/components/CreateBookPage';
 import { EditPage } from '../Books/Editor/components/EditPage';
-import { BookList } from '../Books/List/components/BookList';
+import { BookTable } from '../Books/List/components/BookTable';
 import { Header } from './Header';
 
 const sections = [
@@ -19,7 +19,7 @@ export function AppRoutes() {
       <Header title="Book tracker" sections={sections} />
 
       <Routes>
-        <Route path="/" element={<BookList />} />
+        <Route path="/" element={<BookTable />} />
         <Route path="/edit/:id" element={<EditPage />} />
         <Route path="/create" element={<CreateBookPage />} />
         <Route path="/login" element={<SignInContainer />} />
