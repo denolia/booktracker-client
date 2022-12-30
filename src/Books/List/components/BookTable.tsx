@@ -1,4 +1,5 @@
 import Paper from '@mui/material/Paper';
+import { useTheme } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,10 +14,11 @@ import { BookTableRow } from './BookTableRow';
 
 export function BookTable() {
   const { books } = useBooks();
+  const theme = useTheme();
 
   return (
     <>
-      <Typography variant="h3" gutterBottom marginLeft={3}>
+      <Typography variant="h3" gutterBottom marginLeft={theme.spacing(2)}>
         My books
       </Typography>
 

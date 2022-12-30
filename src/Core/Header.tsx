@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import { Link as LinkRouter } from 'react-router-dom';
-import { useTheme } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -22,7 +22,7 @@ export function Header({ sections, title }: HeaderProps) {
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <LinkRouter color="inherit" to="/">
+        <LinkRouter to="/">
           <img src={Logo} width="30" height="30" alt="Logo" />
         </LinkRouter>
 
@@ -39,7 +39,7 @@ export function Header({ sections, title }: HeaderProps) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small">
+        <Button variant="outlined" color="success" size="small">
           <LinkRouter
             to="/login"
             style={{

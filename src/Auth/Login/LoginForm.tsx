@@ -1,16 +1,14 @@
 import { Copyright } from '@app/Common/Copyright';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import React, { FormEvent } from 'react';
 import { useAuth } from '../AuthContext';
 import { LoginMode } from './types';
@@ -21,6 +19,7 @@ interface Props {
 
 export function LoginForm({ mode }: Props) {
   const { login, signup } = useAuth();
+  const theme = useTheme();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -46,12 +45,8 @@ export function LoginForm({ mode }: Props) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {mode}
-          </Typography>
+          <LockOutlinedIcon style={{ color: theme.palette.primary.light }} />
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -86,6 +81,7 @@ export function LoginForm({ mode }: Props) {
               type="submit"
               fullWidth
               variant="contained"
+              color="success"
               sx={{ mt: 3, mb: 2 }}
             >
               {mode}
