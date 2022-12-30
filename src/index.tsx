@@ -14,15 +14,15 @@ document.body.appendChild(rootElement);
 
 function App() {
   return (
-    <BrowserRouter>
-      <BookThemeProvider>
+    <BookThemeProvider>
+      <BrowserRouter>
         <AuthProvider>
           <BooksProvider>
             <AppRoutes />
           </BooksProvider>
         </AuthProvider>
-      </BookThemeProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </BookThemeProvider>
   );
 }
 const root = createRoot(rootElement);
