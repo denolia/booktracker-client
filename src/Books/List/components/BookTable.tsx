@@ -33,7 +33,7 @@ export function BookTable() {
           </TableHead>
           <TableBody>
             {books.map((book: Book) => (
-              <BookTableRow book={book} />
+              <BookTableRow book={book} key={book.id} />
             ))}
           </TableBody>
         </Table>

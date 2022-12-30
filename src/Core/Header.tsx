@@ -23,16 +23,9 @@ export function Header({ sections, title }: HeaderProps) {
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Link
-          color="inherit"
-          noWrap
-          key="home"
-          variant="body2"
-          href="/"
-          sx={{ p: 1, flexShrink: 0 }}
-        >
+        <LinkRouter color="inherit" key="home" to="/">
           <img src={Logo} width="30" height="30" alt="Logo" />
-        </Link>
+        </LinkRouter>
 
         <Typography
           component="h2"
