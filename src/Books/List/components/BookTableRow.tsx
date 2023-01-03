@@ -1,7 +1,8 @@
+import EditIcon from '@mui/icons-material/Edit';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Book } from '../../types';
 
 interface Props {
@@ -20,7 +21,9 @@ export const BookTableRow = ({ book }: Props) => (
     <TableCell>{book.description}</TableCell>
     <TableCell align="right">{book.progress}</TableCell>
     <TableCell>
-      <Link to={`/edit/${book.id}`}>Edit</Link>
+      <Link to={`/edit/${book.id}`}>
+        <EditIcon color="primary" />
+      </Link>
     </TableCell>
   </TableRow>
 );
