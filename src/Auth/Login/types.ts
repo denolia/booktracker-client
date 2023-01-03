@@ -1,4 +1,4 @@
 export enum LoginMode {
-  SIGN_IN = 'Sign in',
+  SIGN_IN = 'Login',
   SIGN_UP = 'Sign up',
 }

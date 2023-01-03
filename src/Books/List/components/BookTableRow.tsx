@@ -1,20 +1,29 @@
-import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Book } from '../../types';
 
 interface Props {
   book: Book;
-  key: string;
 }
 
 export const BookTableRow = ({ book }: Props) => (
-  <tr>
-    <td>{book.name}</td>
-    <td>{book.author}</td>
-    <td>{book.description}</td>
-    <td>{book.progress}</td>
-    <td>
-      <Link to={`/edit/${book.id}`}>Edit</Link>
-    </td>
-  </tr>
+  <TableRow
+    key={book.id}
+    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+  >
+    <TableCell component="th" scope="row">
+      {book.name}
+    </TableCell>
+    <TableCell>{book.author}</TableCell>
+    <TableCell>{book.description}</TableCell>
+    <TableCell align="right">{book.progress}</TableCell>
+    <TableCell>
+      <Link to={`/edit/${book.id}`}>
+        <EditIcon color="primary" />
+      </Link>
+    </TableCell>
+  </TableRow>
 );
