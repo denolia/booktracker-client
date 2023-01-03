@@ -1,4 +1,9 @@
-import React, { FormEvent, useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React, { FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useBooks } from '../../state/BookContext';
@@ -12,24 +17,29 @@ interface Props {
 
 export function BookForm({ submitButtonText, currentBook, title }: Props) {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const { updateBook } = useBooks();
-  const [name, setName] = useState(currentBook?.name ?? '');
-  const [description, setDescription] = useState(
-    currentBook?.description ?? '',
-  );
-  const [author, setAuthor] = useState(currentBook?.author ?? '');
-  const [progress, setProgress] = useState(currentBook?.progress ?? '');
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await updateBook({
+    const data = new FormData(e.currentTarget);
+
+    const description = data.get('description') as string | undefined;
+    const author = data.get('author') as string | undefined;
+    const progress = Number(
+      (data.get('progress') as string | undefined) ?? '0',
+    );
+    const name = data.get('name') as string | undefined;
+
+    const newBook = {
       description,
       author,
       progress,
       name,
       id: currentBook?.id,
-    } as Book);
+    } as Book;
+    const res = await updateBook(newBook);
 
     if (res) {
       navigate('/');
@@ -38,74 +48,63 @@ export function BookForm({ submitButtonText, currentBook, title }: Props) {
   }
 
   return (
-    <div style={{ marginTop: 10 }}>
-      <h3>{title}</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name" style={{ width: '100%' }}>
-            Title:
-            <input
-              type="text"
-              className="form-control"
-              value={name}
-              name="name"
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label htmlFor="author" style={{ width: '100%' }}>
-            Author:
-            <input
-              type="text"
-              className="form-control"
-              value={author}
-              name="author"
-              id="author"
-              onChange={(e) => setAuthor(e.target.value)}
-            />
-          </label>
-        </div>
+    <>
+      <Typography variant="h4" gutterBottom marginLeft={theme.spacing(3)}>
+        {title}
+      </Typography>
 
-        <div className="form-group">
-          <label htmlFor="description" style={{ width: '100%' }}>
-            Description:
-            <input
-              type="text"
-              className="form-control"
-              value={description}
-              name="description"
-              id="description"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-        </div>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 3 }}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="name"
+          label="Title"
+          name="name"
+          defaultValue={currentBook?.name}
+          autoFocus
+        />
 
-        <div className="form-group">
-          <label htmlFor="progress" style={{ width: '100%' }}>
-            Progress:
-            <input
-              type="number"
-              className="form-control"
-              min="0"
-              max="100"
-              value={progress.toString()}
-              name="progress"
-              id="progress"
-              onChange={(e) => setProgress(Number(e.target.value))}
-            />
-          </label>
-        </div>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="author"
+          label="Author"
+          id="author"
+          defaultValue={currentBook?.author}
+        />
 
-        <div className="form-group">
-          <input
-            type="submit"
-            value={submitButtonText}
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
-    </div>
+        <TextField
+          margin="normal"
+          fullWidth
+          multiline
+          rows={3}
+          name="description"
+          label="Description"
+          id="description"
+          defaultValue={currentBook?.description}
+        />
+
+        <TextField
+          type="number"
+          inputProps={{ min: 0, max: 100 }}
+          name="progress"
+          label="Progress"
+          id="progress"
+          defaultValue={currentBook?.progress}
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="success"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          {submitButtonText}
+        </Button>
+      </Box>
+    </>
   );
 }

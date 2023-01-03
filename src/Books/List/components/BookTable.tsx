@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -18,28 +19,29 @@ export function BookTable() {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom marginLeft={theme.spacing(2)}>
+      <Typography variant="h4" gutterBottom marginLeft={theme.spacing(3)}>
         My books
       </Typography>
-
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Author</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Progress</TableCell>
-              <TableCell> </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {books.map((book: Book) => (
-              <BookTableRow book={book} key={book.id} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box sx={{ m: 3 }}>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Title</TableCell>
+                <TableCell>Author</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell align="right">Progress</TableCell>
+                <TableCell> </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {books.map((book: Book) => (
+                <BookTableRow book={book} key={book.id} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 }
