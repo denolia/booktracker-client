@@ -1,4 +1,6 @@
 import Box from '@mui/material/Box';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -9,13 +11,25 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { useBooks } from '../../state/BookContext';
 import { Book } from '../../types';
 import { BookTableRow } from './BookTableRow';
 
+const fabStyle = {
+  position: 'absolute',
+  bottom: 16,
+  right: 16,
+};
+
 export function BookTable() {
   const { books } = useBooks();
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const onAddBook = () => {
+    navigate('/create');
+  };
 
   return (
     <>
@@ -42,6 +56,10 @@ export function BookTable() {
           </Table>
         </TableContainer>
       </Box>
+
+      <Fab color="success" aria-label="add" sx={fabStyle}>
+        <AddIcon onClick={onAddBook} />
+      </Fab>
     </>
   );
 }
